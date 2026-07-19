@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ibrahim — Founder &amp; Engineer | UMG Africa</title>
+    <meta name="description" content="Ibrahim, 19-year-old Tanzanian founder building deep-tech for Africa's future — swarm robotics, AI, programming languages, and space technology." />
+    <meta name="keywords" content="Ibrahim, UMG Africa, Tanzania, founder, engineer, AI, robotics, mechatronics" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #08080e;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        /* ===== VARIABLES ===== */
+        :root {
+            --green: #00d4aa;
+            --green-dim: #00a884;
+            --amber: #f5b342;
+            --dark: #08080e;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --glass: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text: #e0e0e0;
+            --text-muted: #8888a0;
+            --radius: 16px;
+            --max-w: 1100px;
+        }
+
+        /* ===== ANIMATED GRID BG ===== */
+        #bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; overflow: hidden;
+        }
+        #bg-grid::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        #bg-grid::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,212,170,0.08), transparent 70%);
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            animation: orbFloat 20s ease-in-out infinite alternate;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(0,212,170,0.06); top: -10%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(245,179,66,0.04); bottom: -10%; right: -5%; animation-delay: -7s; }
+        .orb-3 { width: 300px; height: 300px; background: rgba(0,168,132,0.05); top: 50%; left: 50%; animation-delay: -14s; }
+        @keyframes orbFloat {
+            0%   { transform: translate(0, 0) scale(1); }
+            33%  { transform: translate(60px, -40px) scale(1.1); }
+            66%  { transform: translate(-30px, 60px) scale(0.9); }
+            100% { transform: translate(40px, -20px) scale(1.05); }
+        }
+
+        /* ===== LAYOUT ===== */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        section { padding: 100px 0; }
+
+        /* ===== GLASS CARD ===== */
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 16px 24px;
+            background: rgba(8,8,14,0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        nav.scrolled { background: rgba(8,8,14,0.95); }
+        .nav-inner {
+            max-width: var(--max-w); margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-weight: 700; font-size: 1.15rem;
+            background: linear-gradient(135deg, var(--green), var(--amber));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a {
+            font-size: 0.85rem; color: var(--text-muted);
+            transition: color 0.2s; position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px;
+            background: var(--green); transition: width 0.3s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-cta {
+            background: var(--green); color: #08080e !important;
+            padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--amber); transform: translateY(-1px); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .nav-toggle span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding-top: 80px; position: relative;
+        }
+        .hero-content { max-width: 820px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2);
+            padding: 6px 16px; border-radius: 100px; font-size: 0.8rem;
+            color: var(--green); margin-bottom: 24px;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+        }
+        .hero h1 {
+            font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800;
+            line-height: 1.1; letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #fff 40%, var(--green) 70%, var(--amber) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--text-muted); max-width: 640px;
+            margin-top: 24px; line-height: 1.7;
+        }
+        .hero-actions {
+            display: flex; gap: 14px; flex-wrap: wrap;
+            margin-top: 36px;
+        }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; border-radius: 10px;
+            font-weight: 600; font-size: 0.9rem;
+            transition: all 0.25s; cursor: pointer; border: none;
+        }
+        .btn-primary {
+            background: var(--green); color: #08080e;
+        }
+        .btn-primary:hover { background: var(--amber); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,170,0.25); }
+        .btn-outline {
+            background: transparent; color: var(--text);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .btn-outline:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+        .hero-stats {
+            display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap;
+        }
+        .hero-stat h3 {
+            font-size: 2rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--green), var(--amber));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-stat p { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--green); font-weight: 600; margin-bottom: 8px;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.65rem);
+            font-weight: 700; line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            color: var(--text-muted); max-width: 560px;
+            font-size: 1rem; line-height: 1.7;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+            margin-top: 48px;
+        }
+        .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; }
+        .about-text p strong { color: var(--text); }
+        .about-visual {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+        }
+        .about-stat-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 20px;
+            text-align: center; transition: all 0.3s;
+        }
+        .about-stat-card:hover { transform: translateY(-3px); border-color: rgba(0,212,170,0.3); }
+        .about-stat-card .icon { font-size: 2rem; margin-bottom: 8px; }
+        .about-stat-card h4 { font-size: 1.2rem; font-weight: 700; }
+        .about-stat-card h4 span { background: linear-gradient(135deg, var(--green), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about-stat-card p { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* ===== FLYWHEEL / HOLDING STRUCTURE ===== */
+        .flywheel {
+            margin-top: 48px;
+            position: relative;
+        }
+        .flywheel-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+        }
+        .flywheel-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 24px;
+            text-align: center; transition: all 0.35s;
+            position: relative; overflow: hidden;
+        }
+        .flywheel-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: linear-gradient(90deg, var(--green), var(--amber));
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .flywheel-card:hover::before { opacity: 1; }
+        .flywheel-card:hover { transform: translateY(-6px); border-color: rgba(0,212,170,0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .flywheel-card .emoji { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+        .flywheel-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+        .flywheel-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+        .flywheel-card .tag {
+            display: inline-block; margin-top: 10px;
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;
+            padding: 3px 10px; border-radius: 100px;
+            background: rgba(0,212,170,0.1); color: var(--green);
+        }
+        .flywheel-center {
+            text-align: center; margin-bottom: 32px;
+        }
+        .flywheel-center h3 { font-size: 1.4rem; font-weight: 600; }
+        .flywheel-center p { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: flex; flex-direction: column; gap: 24px;
+            margin-top: 48px;
+        }
+        .project-card {
+            display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 28px;
+            transition: all 0.35s;
+        }
+        .project-card:hover { transform: translateY(-3px); border-color: rgba(0,212,170,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+        .project-visual {
+            background: linear-gradient(135deg, rgba(0,212,170,0.05), rgba(245,179,66,0.05));
+            border-radius: 10px; min-height: 180px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; position: relative; overflow: hidden;
+        }
+        .project-visual .glow {
+            position: absolute; width: 150px; height: 150px; border-radius: 50%;
+            filter: blur(60px); opacity: 0.4;
+        }
+        .project-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        .project-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
+        .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+        .project-tags span {
+            font-size: 0.7rem; padding: 3px 10px; border-radius: 100px;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);
+        }
+        .project-links { display: flex; gap: 12px; }
+        .project-links a { font-size: 0.8rem; color: var(--green); font-weight: 500; transition: color 0.2s; }
+        .project-links a:hover { color: var(--amber); }
+        .project-card.reverse { direction: rtl; }
+        .project-card.reverse > * { direction: ltr; }
+
+        /* ===== YOUTUBE / CONTENT ===== */
+        .youtube-showcase { margin-top: 48px; }
+        .yt-card {
+            display: flex; gap: 32px; align-items: center;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 32px;
+        }
+        .yt-text { flex: 1; }
+        .yt-text h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+        .yt-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .yt-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 16px; padding: 10px 24px; border-radius: 10px;
+            background: #ff0033; color: #fff; font-weight: 600; font-size: 0.85rem;
+            transition: all 0.25s;
+        }
+        .yt-cta:hover { background: #cc0022; transform: translateY(-2px); }
+        .yt-visual {
+            font-size: 4rem; opacity: 0.5;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-top: 48px;
+        }
+        .skill-category {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 24px;
+            transition: all 0.3s;
+        }
+        .skill-category:hover { border-color: rgba(0,212,170,0.2); transform: translateY(-2px); }
+        .skill-category h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; color: var(--green); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .skill-tags span {
+            font-size: 0.75rem; padding: 4px 12px; border-radius: 100px;
+            background: rgba(255,255,255,0.04); color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .skill-tags span:hover { background: rgba(0,212,170,0.1); color: var(--green); }
+
+        /* ===== CONTACT ===== */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(0,212,170,0.03), rgba(245,179,66,0.03));
+            border-radius: var(--radius); padding: 60px;
+            text-align: center; margin-top: 48px;
+            border: 1px solid var(--glass-border);
+        }
+        .contact-section h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 12px; }
+        .contact-section p { color: var(--text-muted); max-width: 480px; margin: 0 auto 28px; font-size: 0.95rem; }
+        .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .contact-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 22px; border-radius: 10px;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            color: var(--text); font-size: 0.85rem; font-weight: 500;
+            transition: all 0.25s;
+        }
+        .contact-link:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 40px 0 24px; border-top: 1px solid rgba(255,255,255,0.04);
+            text-align: center;
+        }
+        footer p { font-size: 0.75rem; color: var(--text-muted); }
+        footer .brand { color: var(--green); font-weight: 600; }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; background: rgba(8,8,14,0.98); position: absolute; top: 60px; left: 0; right: 0; padding: 20px 24px; gap: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .nav-links.open { display: flex; }
+            .nav-toggle { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 32px; }
+            .project-card { grid-template-columns: 1fr; gap: 16px; }
+            .project-card.reverse { direction: ltr; }
+            .yt-card { flex-direction: column; text-align: center; }
+            .hero-stats { gap: 24px; }
+            .contact-section { padding: 36px 24px; }
+            .flywheel-grid { grid-template-columns: 1fr 1fr; }
+            .about-visual { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .flywheel-grid { grid-template-columns: 1fr; }
+            .about-visual { grid-template-columns: 1fr; }
+            section { padding: 60px 0; }
+            .hero-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div id="bg-grid">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- ===== NAV ===== -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Ibrahim</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#ventures">Ventures</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#content">Content</a>
+                <a href="#contact" class="nav-cta">Connect</a>
+            </div>
+            <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Building the future from Tanzania
+                </div>
+                <h1>Ibrahim<br/>Founder &amp; Engineer</h1>
+                <p>
+                    At 19, I'm building deep-tech that puts Africa on the map — 
+                    swarm robotics, AI agents, a programming language, 
+                    and space technology. I believe engineering is how we 
+                    liberate our continent.
+                </p>
+                <div class="hero-actions">
+                    <a href="#ventures" class="btn btn-primary">
+                        Explore my work &rarr;
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        Get in touch
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <h3>19</h3>
+                        <p>Years old</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>5</h3>
+                        <p>Companies building</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>Depth</h3>
+                        <p>Robotics &bull; AI &bull; Languages</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <div class="container">
+            <div class="section-label reveal">Who I am</div>
+            <h2 class="section-title reveal">Building Africa's<br/>deep-tech future</h2>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>
+                        I'm <strong>Ibrahim</strong>, a 19-year-old mechatronics engineering student from 
+                        <strong>Tanzania</strong>. I founded <strong>UMG Africa</strong> (Version Extreme Cooperation), 
+                        a holding company building deep-tech that matters — from physical 
+                        robotics to artificial intelligence.
+                    </p>
+                    <p>
+                        I grew up in Tanzania where I saw that the biggest challenges — 
+                        infrastructure, logistics, education, communication — are also the 
+                        biggest engineering opportunities. Instead of waiting for solutions 
+                        to come from abroad, I decided to build them myself.
+                    </p>
+                    <p>
+                        My mission: <strong>build a globally influential AI, robotics, 
+                        and engineering company that originates from Africa</strong>. 
+                        I believe the next wave of technological revolution won't come 
+                        from Silicon Valley alone — it will come from those who face 
+                        the hardest problems and choose to solve them.
+                    </p>
+                </div>
+                <div class="about-visual reveal">
+                    <div class="about-stat-card">
+                        <div class="icon">🧠</div>
+                        <h4><span>AI</span></h4>
+                        <p>Automation &amp; agents</p>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="icon">🤖</div>
+                        <h4><span>Robotics</span></h4>
+                        <p>Swarm intelligence</p>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="icon">⌨️</div>
+                        <h4><span>Languages</span></h4>
+                        <p>Compiler design</p>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="icon">🛰️</div>
+                        <h4><span>Space</span></h4>
+                        <p>Hydrolith systems</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VENTURES (FLYWHEEL) ===== -->
+    <section id="ventures">
+        <div class="container">
+            <div class="section-label reveal">The flywheel</div>
+            <h2 class="section-title reveal">UMG Africa<br/>Holding Company</h2>
+            <p class="section-subtitle reveal">
+                Software cash funds hardware R&amp;D. Hardware breakthroughs 
+                enable space technology. Each company feeds the next.
+            </p>
+
+            <div class="flywheel reveal">
+                <div class="flywheel-center">
+                    <h3>⚡ UMG Africa</h3>
+                    <p>Version Extreme Cooperation — Engineering Africa's Future</p>
+                </div>
+                <div class="flywheel-grid">
+                    <div class="flywheel-card">
+                        <span class="emoji">🌿</span>
+                        <h4>Olive AI</h4>
+                        <p>AI-powered WhatsApp agents for African businesses. Revenue tier.</p>
+                        <span class="tag">Cash Flow</span>
+                    </div>
+                    <div class="flywheel-card">
+                        <span class="emoji">🔗</span>
+                        <h4>Jenga Connect</h4>
+                        <p>Construction marketplace connecting fundis to customers.</p>
+                        <span class="tag">Cash Flow</span>
+                    </div>
+                    <div class="flywheel-card">
+                        <span class="emoji">🐜</span>
+                        <h4>Siafu Robotics</h4>
+                        <p>Swarm robotics — collective intelligence from simple agents.</p>
+                        <span class="tag">Hardware R&amp;D</span>
+                    </div>
+                    <div class="flywheel-card">
+                        <span class="emoji">👻</span>
+                        <h4>Ghost</h4>
+                        <p>A domain-specific systems programming language from scratch.</p>
+                        <span class="tag">Infrastructure</span>
+                    </div>
+                    <div class="flywheel-card">
+                        <span class="emoji">💧</span>
+                        <h4>Hydrolith</h4>
+                        <p>Space technology — long-term exploration infrastructure.</p>
+                        <span class="tag">Frontier</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-label reveal">What I'm building</div>
+            <h2 class="section-title reveal">Featured Projects</h2>
+
+            <div class="projects-grid">
+                <!-- Siafu -->
+                <div class="project-card reveal">
+                    <div class="project-visual">
+                        <div class="glow" style="background:var(--green);"></div>
+                        🐜
+                    </div>
+                    <div class="project-info">
+                        <h3>Siafu Swarm Robotics</h3>
+                        <p>
+                            Bio-inspired swarm robots modelled on Siafu (Dorylus) ants. 
+                            Each agent is simple — collective intelligence emerges from 
+                            the swarm. Custom PCB design, OpenSCAD chassis, Webots 
+                            simulation, and real hardware. Named after the ant species 
+                            that builds bridges with their own bodies.
+                        </p>
+                        <div class="project-tags">
+                            <span>KiCad</span><span>OpenSCAD</span><span>Webots</span>
+                            <span>Python</span><span>Swarm Intelligence</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ibrahim/siafu-swarm" target="_blank">GitHub &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ghost -->
+                <div class="project-card reverse reveal">
+                    <div class="project-visual">
+                        <div class="glow" style="background:var(--amber);"></div>
+                        👻
+                    </div>
+                    <div class="project-info">
+                        <h3>Ghost Programming Language</h3>
+                        <p>
+                            A domain-specific systems language built from scratch. 
+                            Alpha compiler in Rust with recursive descent parsing, 
+                            bytecode VM, and a growing standard library. Designed 
+                            for robotics and embedded systems — the language that 
+                            will eventually run on Siafu's onboard controller.
+                        </p>
+                        <div class="project-tags">
+                            <span>Rust</span><span>Compiler Design</span>
+                            <span>Bytecode VM</span><span>LLVM</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ibrahim/ghost" target="_blank">GitHub &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Olive AI -->
+                <div class="project-card reveal">
+                    <div class="project-visual">
+                        <div class="glow" style="background:var(--green);"></div>
+                        🌿
+                    </div>
+                    <div class="project-info">
+                        <h3>Olive AI</h3>
+                        <p>
+                            AI-powered WhatsApp agent platform for African businesses. 
+                            Automates customer service, lead qualification, and order 
+                            management through natural conversation. Multi-tenant SaaS 
+                            built with Flask, Twilio, and OpenAI — designed for 
+                            businesses that want AI without complexity.
+                        </p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Flask</span><span>Twilio</span>
+                            <span>WhatsApp API</span><span>SaaS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://oliveai.umgafrica.com" target="_blank">Website &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jenga Connect -->
+                <div class="project-card reverse reveal">
+                    <div class="project-visual">
+                        <div class="glow" style="background:var(--amber);"></div>
+                        🔗
+                    </div>
+                    <div class="project-info">
+                        <h3>Jenga Connect</h3>
+                        <p>
+                            A construction marketplace connecting skilled fundis 
+                            (masons, electricians, plumbers) with customers who need 
+                            work done. Bringing trust, transparency, and quality 
+                            assurance to Tanzania's informal construction sector.
+                        </p>
+                        <div class="project-tags">
+                            <span>Marketplace</span><span>Web</span><span>Mobile</span>
+                        </div>
+                        <div class="project-links">
+                            <span style="font-size:0.8rem;color:var(--text-muted);">In development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-label reveal">What I know</div>
+            <h2 class="section-title reveal">Skills &amp; Expertise</h2>
+
+            <div class="skills-grid">
+                <div class="skill-category reveal">
+                    <h4>💻 Software Engineering</h4>
+                    <div class="skill-tags">
+                        <span>Python</span><span>Rust</span><span>JavaScript</span>
+                        <span>Flask</span><span>React</span><span>Node.js</span>
+                        <span>APIs</span><span>Databases</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h4>🤖 Robotics &amp; Hardware</h4>
+                    <div class="skill-tags">
+                        <span>KiCad</span><span>OpenSCAD</span><span>Webots</span>
+                        <span>PCB Design</span><span>3D Printing</span>
+                        <span>Embedded C</span><span>Sensors</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h4>🧠 AI &amp; Language</h4>
+                    <div class="skill-tags">
+                        <span>LLMs</span><span>Compiler Design</span>
+                        <span>Swarm Intelligence</span><span>NLP</span>
+                        <span>Computer Vision</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h4>🚀 Startup &amp; Strategy</h4>
+                    <div class="skill-tags">
+                        <span>Business Strategy</span><span>Product Design</span>
+                        <span>Grant Writing</span><span>Fundraising</span>
+                        <span>Compliance</span><span>Brand Building</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== YOUTUBE / CONTENT ===== -->
+    <section id="content">
+        <div class="container">
+            <div class="section-label reveal">Content</div>
+            <h2 class="section-title reveal">YouTube &amp; Media</h2>
+            <p class="section-subtitle reveal">
+                I document the journey — building deep-tech in Tanzania, 
+                one video at a time.
+            </p>
+
+            <div class="youtube-showcase reveal">
+                <div class="yt-card">
+                    <div class="yt-text">
+                        <h3>SwarmMind YouTube</h3>
+                        <p>
+                            Educational tech content with Hormozi-style captions. 
+                            I show the real process — PCB assembly, compiler bugs, 
+                            robot tests. No fluff, no fake perfection. Just 
+                            engineering as it actually happens in a Tanzanian 
+                            dorm room-turned-lab.
+                        </p>
+                        <a href="https://youtube.com/@ibrahim" target="_blank" class="yt-cta">
+                            ▶ Subscribe on YouTube
+                        </a>
+                    </div>
+                    <div class="yt-visual">🎬</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <div class="container reveal">
+            <div class="contact-section">
+                <h3>Let's build something</h3>
+                <p>
+                    Whether you want to collaborate, invest, mentor, or just 
+                    have a conversation about deep-tech in Africa — I'd love 
+                    to hear from you.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:ibrahim@umgafrica.com" class="contact-link">
+                        📧 ibrahim@umgafrica.com
+                    </a>
+                    <a href="https://github.com/ibrahim" target="_blank" class="contact-link">
+                        💻 GitHub
+                    </a>
+                    <a href="https://twitter.com/ibrahim" target="_blank" class="contact-link">
+                        🐦 X / Twitter
+                    </a>
+                    <a href="https://linkedin.com/in/ibrahim" target="_blank" class="contact-link">
+                        🔗 LinkedIn
+                    </a>
+                    <a href="https://youtube.com/@ibrahim" target="_blank" class="contact-link">
+                        ▶ YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>
+                <span class="brand">UMG Africa</span> &mdash; 
+                Engineering Africa's Future 🌍
+            </p>
+            <p style="margin-top:6px;">
+                &copy; 2026 Ibrahim. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ---- Mobile Nav Toggle ----
+        const toggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        // Close on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // ---- Nav scroll effect ----
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ---- Scroll Reveal (Intersection Observer) ----
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealElements.forEach(el => observer.observe(el));
+
+        // ---- Active nav link on scroll ----
+        const sections = document.querySelectorAll('section[id]');
+        const navAnchors = navLinks.querySelectorAll('a:not(.nav-cta)');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 120;
+                if (window.scrollY >= top) current = section.id;
+            });
+            navAnchors.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+        });
+
+        // ---- Smooth reveal stagger for cards ----
+        document.querySelectorAll('.project-card, .flywheel-card, .skill-category, .about-stat-card').forEach((el, i) => {
+            el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+        });
+    </script>
+</body>
+</html>
