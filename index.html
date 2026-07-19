@@ -9,365 +9,414 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 
     <style>
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #08080e;
-            color: #e0e0e0;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: #08080e; color: #e0e0e0; line-height: 1.6; overflow-x: hidden;
         }
         a { color: inherit; text-decoration: none; }
         img { max-width: 100%; display: block; }
 
-        /* ===== VARIABLES ===== */
         :root {
-            --green: #00d4aa;
-            --green-dim: #00a884;
-            --amber: #f5b342;
-            --dark: #08080e;
-            --card-bg: rgba(255, 255, 255, 0.04);
-            --glass: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text: #e0e0e0;
-            --text-muted: #8888a0;
-            --radius: 16px;
-            --max-w: 1100px;
+            --green: #00d4aa; --green-dim: #00a884; --amber: #f5b342;
+            --dark: #08080e; --card-bg: rgba(255,255,255,0.04);
+            --glass: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.08);
+            --text: #e0e0e0; --text-muted: #8888a0; --radius: 16px; --max-w: 1100px;
         }
 
-        /* ===== ANIMATED GRID BG ===== */
-        #bg-grid {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; overflow: hidden;
-        }
+        #bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
         #bg-grid::before {
-            content: '';
-            position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 60px 60px;
         }
         #bg-grid::after {
-            content: '';
-            position: absolute; inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,212,170,0.08), transparent 70%);
         }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(80px);
-            animation: orbFloat 20s ease-in-out infinite alternate;
-        }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); animation: orbFloat 20s ease-in-out infinite alternate; }
         .orb-1 { width: 500px; height: 500px; background: rgba(0,212,170,0.06); top: -10%; left: -10%; }
         .orb-2 { width: 400px; height: 400px; background: rgba(245,179,66,0.04); bottom: -10%; right: -5%; animation-delay: -7s; }
         .orb-3 { width: 300px; height: 300px; background: rgba(0,168,132,0.05); top: 50%; left: 50%; animation-delay: -14s; }
         @keyframes orbFloat {
-            0%   { transform: translate(0, 0) scale(1); }
-            33%  { transform: translate(60px, -40px) scale(1.1); }
-            66%  { transform: translate(-30px, 60px) scale(0.9); }
-            100% { transform: translate(40px, -20px) scale(1.05); }
+            0% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(60px,-40px) scale(1.1); }
+            66% { transform: translate(-30px,60px) scale(0.9); }
+            100% { transform: translate(40px,-20px) scale(1.05); }
         }
 
-        /* ===== LAYOUT ===== */
         .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
         section { padding: 100px 0; }
+        .glass { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--radius); }
 
-        /* ===== GLASS CARD ===== */
-        .glass {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius);
-        }
-
-        /* ===== NAV ===== */
+        /* NAV */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 16px 24px;
-            background: rgba(8,8,14,0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
+            padding: 16px 24px; background: rgba(8,8,14,0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.05); transition: all 0.3s;
         }
         nav.scrolled { background: rgba(8,8,14,0.95); }
-        .nav-inner {
-            max-width: var(--max-w); margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .nav-logo {
-            font-weight: 700; font-size: 1.15rem;
-            background: linear-gradient(135deg, var(--green), var(--amber));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .nav-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-weight: 700; font-size: 1.15rem; background: linear-gradient(135deg,var(--green),var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; gap: 28px; align-items: center; }
-        .nav-links a {
-            font-size: 0.85rem; color: var(--text-muted);
-            transition: color 0.2s; position: relative;
-        }
+        .nav-links a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; position: relative; }
         .nav-links a:hover, .nav-links a.active { color: var(--text); }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px;
-            background: var(--green); transition: width 0.3s;
-        }
+        .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--green); transition: width 0.3s; }
         .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .nav-cta {
-            background: var(--green); color: #08080e !important;
-            padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: 0.85rem;
-            transition: all 0.2s;
-        }
+        .nav-cta { background: var(--green); color: #08080e !important; padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; transition: all 0.2s; }
         .nav-cta::after { display: none !important; }
         .nav-cta:hover { background: var(--amber); transform: translateY(-1px); }
         .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
         .nav-toggle span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
 
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center;
-            padding-top: 80px; position: relative;
-        }
-        .hero-content { max-width: 820px; }
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; position: relative; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2);
-            padding: 6px 16px; border-radius: 100px; font-size: 0.8rem;
-            color: var(--green); margin-bottom: 24px;
+            padding: 6px 16px; border-radius: 100px; font-size: 0.8rem; color: var(--green); margin-bottom: 24px;
         }
-        .hero-badge .dot {
-            width: 6px; height: 6px; border-radius: 50%; background: var(--green);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
-        }
+        .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
         .hero h1 {
-            font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800;
-            line-height: 1.1; letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #fff 40%, var(--green) 70%, var(--amber) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: clamp(2.6rem,7vw,5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+            background: linear-gradient(135deg,#fff 40%,var(--green) 70%,var(--amber) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .hero p {
-            font-size: clamp(1.05rem, 2vw, 1.25rem);
-            color: var(--text-muted); max-width: 640px;
-            margin-top: 24px; line-height: 1.7;
-        }
-        .hero-actions {
-            display: flex; gap: 14px; flex-wrap: wrap;
-            margin-top: 36px;
-        }
+        .hero p { font-size: clamp(1.05rem,2vw,1.25rem); color: var(--text-muted); max-width: 640px; margin-top: 24px; line-height: 1.7; }
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 36px; }
         .btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 12px 28px; border-radius: 10px;
-            font-weight: 600; font-size: 0.9rem;
-            transition: all 0.25s; cursor: pointer; border: none;
+            display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 10px;
+            font-weight: 600; font-size: 0.9rem; transition: all 0.25s; cursor: pointer; border: none;
         }
-        .btn-primary {
-            background: var(--green); color: #08080e;
-        }
+        .btn-primary { background: var(--green); color: #08080e; }
         .btn-primary:hover { background: var(--amber); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,170,0.25); }
-        .btn-outline {
-            background: transparent; color: var(--text);
-            border: 1px solid rgba(255,255,255,0.15);
-        }
+        .btn-outline { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.15); }
         .btn-outline:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
-        .hero-stats {
-            display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap;
-        }
-        .hero-stat h3 {
-            font-size: 2rem; font-weight: 700;
-            background: linear-gradient(135deg, var(--green), var(--amber));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .hero-stats { display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap; }
+        .hero-stat h3 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg,var(--green),var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .hero-stat p { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
 
-        /* ===== SECTION HEADERS ===== */
-        .section-label {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
-            color: var(--green); font-weight: 600; margin-bottom: 8px;
+        /* PROFILE PHOTO */
+        .hero-photo { display: flex; justify-content: center; align-items: center; }
+        .profile-frame {
+            position: relative; width: 320px; height: 320px;
+            border-radius: 50%; padding: 6px;
+            background: linear-gradient(135deg, var(--green), var(--amber));
+            box-shadow: 0 0 60px rgba(0,212,170,0.15);
+            transition: all 0.4s;
         }
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.65rem);
-            font-weight: 700; line-height: 1.2;
-            margin-bottom: 16px;
+        .profile-frame:hover { transform: scale(1.03); box-shadow: 0 0 80px rgba(0,212,170,0.25); }
+        .profile-inner {
+            width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+            background: var(--dark); display: flex; align-items: center; justify-content: center;
+            position: relative;
         }
-        .section-subtitle {
-            color: var(--text-muted); max-width: 560px;
-            font-size: 1rem; line-height: 1.7;
+        .profile-inner svg { width: 100%; height: 100%; }
+        .profile-ring {
+            position: absolute; inset: -8px; border-radius: 50%;
+            border: 2px solid rgba(0,212,170,0.15);
+            animation: ringPulse 4s ease-in-out infinite;
         }
+        @keyframes ringPulse {
+            0%,100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .profile-placeholder {
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(245,179,66,0.08));
+            font-size: 5rem; font-weight: 700; color: var(--green); user-select: none;
+        }
+        .photo-credit {
+            text-align: center; margin-top: 16px; font-size: 0.7rem; color: var(--text-muted);
+            opacity: 0.6; transition: opacity 0.3s;
+        }
+        .photo-credit:hover { opacity: 1; }
+        .photo-credit label { cursor: pointer; text-decoration: underline; text-decoration-style: dotted; }
+        .photo-credit input[type="file"] { display: none; }
 
-        /* ===== ABOUT ===== */
-        .about-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
-            margin-top: 48px;
-        }
+        /* SECTION HEADERS */
+        .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); font-weight: 600; margin-bottom: 8px; }
+        .section-title { font-size: clamp(1.8rem,4vw,2.65rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+        .section-subtitle { color: var(--text-muted); max-width: 560px; font-size: 1rem; line-height: 1.7; }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 48px; }
         .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; }
         .about-text p strong { color: var(--text); }
-        .about-visual {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-        }
+        .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .about-stat-card {
             background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 20px;
-            text-align: center; transition: all 0.3s;
+            border-radius: var(--radius); padding: 20px; text-align: center; transition: all 0.3s;
         }
         .about-stat-card:hover { transform: translateY(-3px); border-color: rgba(0,212,170,0.3); }
         .about-stat-card .icon { font-size: 2rem; margin-bottom: 8px; }
         .about-stat-card h4 { font-size: 1.2rem; font-weight: 700; }
-        .about-stat-card h4 span { background: linear-gradient(135deg, var(--green), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about-stat-card h4 span { background: linear-gradient(135deg,var(--green),var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .about-stat-card p { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
 
-        /* ===== FLYWHEEL / HOLDING STRUCTURE ===== */
-        .flywheel {
-            margin-top: 48px;
-            position: relative;
-        }
-        .flywheel-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 16px;
-        }
+        /* FLYWHEEL */
+        .flywheel { margin-top: 48px; }
+        .flywheel-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 16px; }
         .flywheel-card {
             background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 24px;
-            text-align: center; transition: all 0.35s;
-            position: relative; overflow: hidden;
+            border-radius: var(--radius); padding: 24px; text-align: center; transition: all 0.35s; position: relative; overflow: hidden;
         }
-        .flywheel-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 3px; background: linear-gradient(90deg, var(--green), var(--amber));
-            opacity: 0; transition: opacity 0.3s;
-        }
+        .flywheel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--green),var(--amber)); opacity: 0; transition: opacity 0.3s; }
         .flywheel-card:hover::before { opacity: 1; }
         .flywheel-card:hover { transform: translateY(-6px); border-color: rgba(0,212,170,0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .flywheel-card .emoji { font-size: 2.2rem; margin-bottom: 12px; display: block; }
         .flywheel-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
         .flywheel-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
-        .flywheel-card .tag {
-            display: inline-block; margin-top: 10px;
-            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;
-            padding: 3px 10px; border-radius: 100px;
-            background: rgba(0,212,170,0.1); color: var(--green);
-        }
-        .flywheel-center {
-            text-align: center; margin-bottom: 32px;
-        }
+        .flywheel-card .tag { display: inline-block; margin-top: 10px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px; background: rgba(0,212,170,0.1); color: var(--green); }
+        .flywheel-center { text-align: center; margin-bottom: 32px; }
         .flywheel-center h3 { font-size: 1.4rem; font-weight: 600; }
         .flywheel-center p { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
 
-        /* ===== PROJECTS ===== */
-        .projects-grid {
-            display: flex; flex-direction: column; gap: 24px;
-            margin-top: 48px;
-        }
+        /* PROJECTS */
+        .projects-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 48px; }
         .project-card {
             display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px;
             background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 28px;
-            transition: all 0.35s;
+            border-radius: var(--radius); padding: 28px; transition: all 0.35s;
         }
         .project-card:hover { transform: translateY(-3px); border-color: rgba(0,212,170,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
         .project-visual {
-            background: linear-gradient(135deg, rgba(0,212,170,0.05), rgba(245,179,66,0.05));
-            border-radius: 10px; min-height: 180px;
-            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg,rgba(0,212,170,0.05),rgba(245,179,66,0.05));
+            border-radius: 10px; min-height: 180px; display: flex; align-items: center; justify-content: center;
             font-size: 3.5rem; position: relative; overflow: hidden;
         }
-        .project-visual .glow {
-            position: absolute; width: 150px; height: 150px; border-radius: 50%;
-            filter: blur(60px); opacity: 0.4;
-        }
+        .project-visual .glow { position: absolute; width: 150px; height: 150px; border-radius: 50%; filter: blur(60px); opacity: 0.4; }
         .project-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
         .project-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
         .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-        .project-tags span {
-            font-size: 0.7rem; padding: 3px 10px; border-radius: 100px;
-            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);
-        }
+        .project-tags span { font-size: 0.7rem; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
         .project-links { display: flex; gap: 12px; }
         .project-links a { font-size: 0.8rem; color: var(--green); font-weight: 500; transition: color 0.2s; }
         .project-links a:hover { color: var(--amber); }
         .project-card.reverse { direction: rtl; }
         .project-card.reverse > * { direction: ltr; }
 
-        /* ===== YOUTUBE / CONTENT ===== */
-        .youtube-showcase { margin-top: 48px; }
-        .yt-card {
-            display: flex; gap: 32px; align-items: center;
-            background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 32px;
+        /* GAME SECTION */
+        #game { position: relative; }
+        .game-container {
+            margin-top: 48px; background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 32px; overflow: hidden;
         }
-        .yt-text { flex: 1; }
-        .yt-text h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
-        .yt-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-        .yt-cta {
+        .game-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+        .game-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        .game-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+        .game-level-badge {
             display: inline-flex; align-items: center; gap: 8px;
-            margin-top: 16px; padding: 10px 24px; border-radius: 10px;
-            background: #ff0033; color: #fff; font-weight: 600; font-size: 0.85rem;
-            transition: all 0.25s;
+            background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2);
+            padding: 4px 14px; border-radius: 100px; font-size: 0.75rem; color: var(--green); margin-bottom: 12px;
         }
-        .yt-cta:hover { background: #cc0022; transform: translateY(-2px); }
-        .yt-visual {
-            font-size: 4rem; opacity: 0.5;
+        .game-grid-wrapper { display: flex; flex-direction: column; align-items: center; }
+        .game-grid {
+            display: grid; gap: 3px; background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border); border-radius: 10px; padding: 8px;
+            width: fit-content;
         }
+        .game-cell {
+            width: 48px; height: 48px; border-radius: 6px;
+            background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; transition: all 0.2s; position: relative;
+        }
+        .game-cell.wall { background: rgba(255,255,255,0.08); }
+        .game-cell.target { background: rgba(245,179,66,0.15); box-shadow: inset 0 0 20px rgba(245,179,66,0.1); }
+        .game-cell.bot { background: rgba(0,212,170,0.15); }
+        .game-cell.path { animation: pathPulse 0.5s ease; }
+        @keyframes pathPulse { 0% { background: rgba(0,212,170,0.3); } 100% { background: rgba(0,212,170,0.05); } }
+        .game-bot { font-size: 1.6rem; filter: drop-shadow(0 0 6px rgba(0,212,170,0.5)); }
+        .game-target { font-size: 1.6rem; }
+        .game-cell.obstacle { background: rgba(255,80,80,0.1); }
+        .game-cell.obstacle::after { content: 'X'; color: rgba(255,80,80,0.4); font-weight: 700; font-size: 1.2rem; }
 
-        /* ===== SKILLS ===== */
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px; margin-top: 48px;
+        .commands-panel {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            border-radius: 10px; padding: 16px; margin-top: 16px;
         }
-        .skill-category {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 24px;
-            transition: all 0.3s;
+        .commands-panel h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
+        .commands-available { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+        .cmd-btn {
+            padding: 6px 14px; border-radius: 6px; border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.04); color: var(--text); font-size: 0.75rem;
+            cursor: pointer; transition: all 0.2s; font-family: inherit;
         }
+        .cmd-btn:hover { background: rgba(0,212,170,0.1); border-color: var(--green); }
+        .cmd-btn.added { background: rgba(0,212,170,0.15); border-color: var(--green); }
+        .program-list {
+            display: flex; gap: 4px; flex-wrap: wrap; min-height: 36px;
+            padding: 8px; background: rgba(0,0,0,0.2); border-radius: 6px; border: 1px dashed var(--glass-border);
+            margin-bottom: 12px;
+        }
+        .program-step {
+            padding: 4px 10px; border-radius: 4px; background: rgba(0,212,170,0.12);
+            border: 1px solid rgba(0,212,170,0.2); font-size: 0.7rem; cursor: pointer;
+            transition: all 0.15s; display: flex; align-items: center; gap: 4px;
+        }
+        .program-step:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.3); }
+        .program-step .rm { font-size: 0.6rem; opacity: 0.5; }
+        .program-step:hover .rm { opacity: 1; }
+        .program-step.loop-start { background: rgba(245,179,66,0.12); border-color: rgba(245,179,66,0.2); }
+        .program-step.loop-end { background: rgba(245,179,66,0.12); border-color: rgba(245,179,66,0.2); }
+
+        .game-controls { display: flex; gap: 8px; margin-top: 12px; }
+        .game-controls .btn { padding: 8px 20px; font-size: 0.8rem; }
+        .game-controls .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .game-status {
+            margin-top: 12px; font-size: 0.8rem; color: var(--text-muted);
+            padding: 8px 14px; border-radius: 6px; background: rgba(255,255,255,0.02);
+            min-height: 32px; display: flex; align-items: center;
+        }
+        .game-status.win { color: var(--green); background: rgba(0,212,170,0.08); }
+        .game-status.lose { color: #ff6b6b; background: rgba(255,80,80,0.08); }
+        .game-score { text-align: center; margin-top: 16px; font-size: 0.85rem; color: var(--text-muted); }
+        .game-score strong { color: var(--green); }
+
+        .repeat-dialog {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+        }
+        .repeat-dialog.open { display: flex; }
+        .repeat-dialog-inner {
+            background: #14141e; border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 28px; max-width: 340px; text-align: center;
+        }
+        .repeat-dialog-inner h4 { font-size: 1rem; margin-bottom: 16px; }
+        .repeat-dialog-inner .btn { margin: 4px; }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 16px; margin-top: 48px; }
+        .skill-category { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 24px; transition: all 0.3s; }
         .skill-category:hover { border-color: rgba(0,212,170,0.2); transform: translateY(-2px); }
         .skill-category h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; color: var(--green); }
         .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .skill-tags span {
-            font-size: 0.75rem; padding: 4px 12px; border-radius: 100px;
-            background: rgba(255,255,255,0.04); color: var(--text-muted);
-            transition: all 0.2s;
-        }
+        .skill-tags span { font-size: 0.75rem; padding: 4px 12px; border-radius: 100px; background: rgba(255,255,255,0.04); color: var(--text-muted); transition: all 0.2s; }
         .skill-tags span:hover { background: rgba(0,212,170,0.1); color: var(--green); }
 
-        /* ===== CONTACT ===== */
-        .contact-section {
-            background: linear-gradient(135deg, rgba(0,212,170,0.03), rgba(245,179,66,0.03));
-            border-radius: var(--radius); padding: 60px;
-            text-align: center; margin-top: 48px;
-            border: 1px solid var(--glass-border);
-        }
+        /* YOUTUBE */
+        .youtube-showcase { margin-top: 48px; }
+        .yt-card { display: flex; gap: 32px; align-items: center; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; }
+        .yt-text { flex: 1; }
+        .yt-text h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+        .yt-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .yt-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 10px 24px; border-radius: 10px; background: #ff0033; color: #fff; font-weight: 600; font-size: 0.85rem; transition: all 0.25s; }
+        .yt-cta:hover { background: #cc0022; transform: translateY(-2px); }
+        .yt-visual { font-size: 4rem; opacity: 0.5; }
+
+        /* CONTACT */
+        .contact-section { background: linear-gradient(135deg,rgba(0,212,170,0.03),rgba(245,179,66,0.03)); border-radius: var(--radius); padding: 60px; text-align: center; margin-top: 48px; border: 1px solid var(--glass-border); }
         .contact-section h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 12px; }
         .contact-section p { color: var(--text-muted); max-width: 480px; margin: 0 auto 28px; font-size: 0.95rem; }
         .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .contact-link {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 22px; border-radius: 10px;
-            background: var(--glass); border: 1px solid var(--glass-border);
-            color: var(--text); font-size: 0.85rem; font-weight: 500;
-            transition: all 0.25s;
-        }
+        .contact-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 10px; background: var(--glass); border: 1px solid var(--glass-border); color: var(--text); font-size: 0.85rem; font-weight: 500; transition: all 0.25s; }
         .contact-link:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
 
-        /* ===== FOOTER ===== */
-        footer {
-            padding: 40px 0 24px; border-top: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-        }
+        /* FOOTER */
+        footer { padding: 40px 0 80px; border-top: 1px solid rgba(255,255,255,0.04); text-align: center; }
         footer p { font-size: 0.75rem; color: var(--text-muted); }
         footer .brand { color: var(--green); font-weight: 600; }
 
-        /* ===== SCROLL ANIMATIONS ===== */
-        .reveal {
-            opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        /* CHATBOT */
+        .chat-toggle {
+            position: fixed; bottom: 24px; right: 24px; z-index: 150;
+            width: 56px; height: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--green), var(--green-dim));
+            border: none; color: #08080e; font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 4px 24px rgba(0,212,170,0.3);
+            transition: all 0.3s; display: flex; align-items: center; justify-content: center;
         }
+        .chat-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(0,212,170,0.4); }
+        .chat-toggle.active { transform: rotate(90deg); background: var(--amber); box-shadow: 0 4px 24px rgba(245,179,66,0.3); }
+        .chat-panel {
+            position: fixed; bottom: 90px; right: 24px; z-index: 149;
+            width: 360px; max-height: 520px; background: #14141e;
+            border: 1px solid var(--glass-border); border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            display: none; flex-direction: column; overflow: hidden;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        }
+        .chat-panel.open { display: flex; }
+        .chat-header {
+            padding: 16px 20px; background: rgba(0,212,170,0.08);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .chat-header .avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--green), var(--amber));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; font-weight: 700; color: #08080e;
+        }
+        .chat-header .info h4 { font-size: 0.85rem; font-weight: 600; }
+        .chat-header .info p { font-size: 0.65rem; color: var(--green); }
+        .chat-messages {
+            flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+            max-height: 340px;
+        }
+        .chat-msg {
+            max-width: 85%; padding: 10px 14px; border-radius: 12px;
+            font-size: 0.8rem; line-height: 1.5; animation: msgIn 0.3s ease;
+        }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-msg.bot {
+            background: rgba(255,255,255,0.06); align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user {
+            background: rgba(0,212,170,0.12); align-self: flex-end;
+            border-bottom-right-radius: 4px; color: var(--green);
+        }
+        .chat-msg.system {
+            background: transparent; align-self: center; font-size: 0.7rem;
+            color: var(--text-muted); text-align: center; max-width: 100%;
+        }
+        .chat-input-area {
+            padding: 12px 16px; border-top: 1px solid var(--glass-border);
+            display: flex; gap: 8px;
+        }
+        .chat-input-area input {
+            flex: 1; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.04); color: var(--text); font-size: 0.8rem;
+            outline: none; transition: border-color 0.2s; font-family: inherit;
+        }
+        .chat-input-area input:focus { border-color: var(--green); }
+        .chat-input-area input::placeholder { color: var(--text-muted); }
+        .chat-send {
+            width: 38px; height: 38px; border-radius: 8px; border: none;
+            background: var(--green); color: #08080e; font-size: 1rem; cursor: pointer;
+            transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .chat-send:hover { background: var(--amber); }
+        .chat-suggestions {
+            display: flex; gap: 6px; padding: 8px 16px; flex-wrap: wrap;
+            background: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        .chat-suggestion {
+            font-size: 0.7rem; padding: 4px 10px; border-radius: 100px;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+            color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+        }
+        .chat-suggestion:hover { background: rgba(0,212,170,0.1); border-color: var(--green); color: var(--green); }
+
+        /* REVEAL ANIMATIONS */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ===== RESPONSIVE ===== */
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-actions { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .profile-frame { width: 240px; height: 240px; }
+            .game-layout { grid-template-columns: 1fr; }
+            .game-info { text-align: center; }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; flex-direction: column; background: rgba(8,8,14,0.98); position: absolute; top: 60px; left: 0; right: 0; padding: 20px 24px; gap: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
             .nav-links.open { display: flex; }
@@ -380,6 +429,10 @@
             .contact-section { padding: 36px 24px; }
             .flywheel-grid { grid-template-columns: 1fr 1fr; }
             .about-visual { grid-template-columns: 1fr 1fr; }
+            .chat-panel { width: calc(100vw - 32px); right: 16px; bottom: 80px; max-height: 480px; }
+            .game-cell { width: 36px; height: 36px; font-size: 1rem; }
+            .game-bot { font-size: 1.2rem; }
+            .game-target { font-size: 1.2rem; }
         }
         @media (max-width: 480px) {
             .flywheel-grid { grid-template-columns: 1fr; }
@@ -387,39 +440,42 @@
             section { padding: 60px 0; }
             .hero-actions { flex-direction: column; }
             .btn { width: 100%; justify-content: center; }
+            .game-cell { width: 30px; height: 30px; font-size: 0.85rem; }
+            .game-bot { font-size: 1rem; }
+            .game-target { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ANIMATED BACKGROUND ===== -->
-    <div id="bg-grid">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
+<div id="bg-grid">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
 
-    <!-- ===== NAV ===== -->
-    <nav id="navbar">
-        <div class="nav-inner">
-            <a href="#" class="nav-logo">Ibrahim</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#ventures">Ventures</a>
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-                <a href="#content">Content</a>
-                <a href="#contact" class="nav-cta">Connect</a>
-            </div>
-            <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span><span></span><span></span>
-            </div>
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">Ibrahim</a>
+        <div class="nav-links" id="navLinks">
+            <a href="#about">About</a>
+            <a href="#ventures">Ventures</a>
+            <a href="#projects">Projects</a>
+            <a href="#game">Game</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact" class="nav-cta">Connect</a>
         </div>
-    </nav>
+        <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero">
-        <div class="container">
+<!-- HERO with Profile Photo -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-grid">
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
@@ -427,10 +483,9 @@
                 </div>
                 <h1>Ibrahim<br/>Founder &amp; Engineer</h1>
                 <p>
-                    At 19, I'm building deep-tech that puts Africa on the map — 
-                    swarm robotics, AI agents, a programming language, 
-                    and space technology. I believe engineering is how we 
-                    liberate our continent.
+                    At 19, I'm building deep-tech that puts Africa on the map &mdash;
+                    swarm robotics, AI agents, a programming language,
+                    and space technology. Engineering is how we liberate our continent.
                 </p>
                 <div class="hero-actions">
                     <a href="#ventures" class="btn btn-primary">
@@ -441,401 +496,876 @@
                     </a>
                 </div>
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <h3>19</h3>
-                        <p>Years old</p>
+                    <div class="hero-stat"><h3>19</h3><p>Years old</p></div>
+                    <div class="hero-stat"><h3>5</h3><p>Companies building</p></div>
+                    <div class="hero-stat"><h3>Depth</h3><p>Robotics &bull; AI &bull; Languages</p></div>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <div class="profile-frame">
+                    <div class="profile-ring"></div>
+                    <div class="profile-inner">
+                        <!-- SVG placeholder avatar — replace with your photo -->
+                        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="avatarBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00d4aa" stop-opacity="0.15"/>
+                                    <stop offset="100%" stop-color="#f5b342" stop-opacity="0.08"/>
+                                </linearGradient>
+                                <clipPath id="circleClip">
+                                    <circle cx="150" cy="150" r="145"/>
+                                </clipPath>
+                            </defs>
+                            <circle cx="150" cy="150" r="145" fill="url(#avatarBg)"/>
+                            <g clip-path="url(#circleClip)">
+                                <!-- Tech circuit pattern -->
+                                <path d="M0 200 L80 200 L120 160 L180 160 L220 200 L300 200" stroke="#00d4aa" stroke-width="1.5" fill="none" opacity="0.15"/>
+                                <path d="M0 120 L60 120 L100 80 L200 80 L240 120 L300 120" stroke="#f5b342" stroke-width="1.5" fill="none" opacity="0.1"/>
+                                <circle cx="60" cy="200" r="3" fill="#00d4aa" opacity="0.3"/>
+                                <circle cx="240" cy="120" r="3" fill="#f5b342" opacity="0.3"/>
+                                <circle cx="150" cy="80" r="4" fill="#00d4aa" opacity="0.2"/>
+                                <!-- Profile silhouette -->
+                                <ellipse cx="150" cy="115" rx="40" ry="42" fill="rgba(255,255,255,0.08)"/>
+                                <ellipse cx="150" cy="220" rx="65" ry="50" fill="rgba(255,255,255,0.08)"/>
+                                <!-- Initial -->
+                                <text x="150" y="178" text-anchor="middle" dominant-baseline="central"
+                                      font-size="96" font-weight="700" fill="#00d4aa" opacity="0.4">I</text>
+                            </g>
+                            <circle cx="150" cy="150" r="145" fill="none" stroke="rgba(0,212,170,0.15)" stroke-width="2"/>
+                        </svg>
+                        <img id="profileImg" style="display:none;width:100%;height:100%;object-fit:cover;" alt="Ibrahim"/>
                     </div>
-                    <div class="hero-stat">
-                        <h3>5</h3>
-                        <p>Companies building</p>
+                </div>
+                <div class="photo-credit">
+                    <label for="photoUpload">Upload your photo</label>
+                    <input type="file" id="photoUpload" accept="image/*"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="section-label reveal">Who I am</div>
+        <h2 class="section-title reveal">Building Africa's<br/>deep-tech future</h2>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>I'm <strong>Ibrahim</strong>, a 19-year-old mechatronics engineering student from <strong>Tanzania</strong>. I founded <strong>UMG Africa</strong> (Version Extreme Cooperation), a holding company building deep-tech that matters — from physical robotics to artificial intelligence.</p>
+                <p>I grew up in Tanzania where I saw that the biggest challenges — infrastructure, logistics, education, communication — are also the biggest engineering opportunities. Instead of waiting for solutions to come from abroad, I decided to build them myself.</p>
+                <p>My mission: <strong>build a globally influential AI, robotics, and engineering company that originates from Africa</strong>. I believe the next wave of technological revolution won't come from Silicon Valley alone — it will come from those who face the hardest problems and choose to solve them.</p>
+            </div>
+            <div class="about-visual reveal">
+                <div class="about-stat-card"><div class="icon">🧠</div><h4><span>AI</span></h4><p>Automation &amp; agents</p></div>
+                <div class="about-stat-card"><div class="icon">🤖</div><h4><span>Robotics</span></h4><p>Swarm intelligence</p></div>
+                <div class="about-stat-card"><div class="icon">⌨️</div><h4><span>Languages</span></h4><p>Compiler design</p></div>
+                <div class="about-stat-card"><div class="icon">🛰️</div><h4><span>Space</span></h4><p>Hydrolith systems</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VENTURES -->
+<section id="ventures">
+    <div class="container">
+        <div class="section-label reveal">The flywheel</div>
+        <h2 class="section-title reveal">UMG Africa Holding Company</h2>
+        <p class="section-subtitle reveal">Software cash funds hardware R&amp;D. Hardware breakthroughs enable space technology. Each company feeds the next.</p>
+        <div class="flywheel reveal">
+            <div class="flywheel-center"><h3>⚡ UMG Africa</h3><p>Version Extreme Cooperation — Engineering Africa's Future</p></div>
+            <div class="flywheel-grid">
+                <div class="flywheel-card"><span class="emoji">🌿</span><h4>Olive AI</h4><p>AI-powered WhatsApp agents for African businesses.</p><span class="tag">Cash Flow</span></div>
+                <div class="flywheel-card"><span class="emoji">🔗</span><h4>Jenga Connect</h4><p>Construction marketplace connecting fundis to customers.</p><span class="tag">Cash Flow</span></div>
+                <div class="flywheel-card"><span class="emoji">🐜</span><h4>Siafu Robotics</h4><p>Swarm robotics — collective intelligence from simple agents.</p><span class="tag">Hardware R&amp;D</span></div>
+                <div class="flywheel-card"><span class="emoji">👻</span><h4>Ghost</h4><p>A domain-specific systems programming language from scratch.</p><span class="tag">Infrastructure</span></div>
+                <div class="flywheel-card"><span class="emoji">💧</span><h4>Hydrolith</h4><p>Space technology — long-term exploration infrastructure.</p><span class="tag">Frontier</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <div class="section-label reveal">What I'm building</div>
+        <h2 class="section-title reveal">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-visual"><div class="glow" style="background:var(--green);"></div>🐜</div>
+                <div class="project-info">
+                    <h3>Siafu Swarm Robotics</h3>
+                    <p>Bio-inspired swarm robots modelled on Siafu (Dorylus) ants. Each agent is simple — collective intelligence emerges from the swarm. Custom PCB design, OpenSCAD chassis, Webots simulation, and real hardware. Named after the ant species that builds bridges with their own bodies.</p>
+                    <div class="project-tags"><span>KiCad</span><span>OpenSCAD</span><span>Webots</span><span>Python</span><span>Swarm Intelligence</span></div>
+                    <div class="project-links"><a href="#" target="_blank">GitHub &rarr;</a></div>
+                </div>
+            </div>
+            <div class="project-card reverse reveal">
+                <div class="project-visual"><div class="glow" style="background:var(--amber);"></div>👻</div>
+                <div class="project-info">
+                    <h3>Ghost Programming Language</h3>
+                    <p>A domain-specific systems language built from scratch. Alpha compiler in Rust with recursive descent parsing, bytecode VM, and a growing standard library. Designed for robotics and embedded systems — the language that will eventually run on Siafu's onboard controller.</p>
+                    <div class="project-tags"><span>Rust</span><span>Compiler Design</span><span>Bytecode VM</span></div>
+                    <div class="project-links"><a href="#" target="_blank">GitHub &rarr;</a></div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-visual"><div class="glow" style="background:var(--green);"></div>🌿</div>
+                <div class="project-info">
+                    <h3>Olive AI</h3>
+                    <p>AI-powered WhatsApp agent platform for African businesses. Automates customer service, lead qualification, and order management through natural conversation. Multi-tenant SaaS built with Flask, Twilio, and OpenAI.</p>
+                    <div class="project-tags"><span>Python</span><span>Flask</span><span>Twilio</span><span>WhatsApp API</span><span>SaaS</span></div>
+                    <div class="project-links"><a href="#" target="_blank">Website &rarr;</a></div>
+                </div>
+            </div>
+            <div class="project-card reverse reveal">
+                <div class="project-visual"><div class="glow" style="background:var(--amber);"></div>🔗</div>
+                <div class="project-info">
+                    <h3>Jenga Connect</h3>
+                    <p>A construction marketplace connecting skilled fundis (masons, electricians, plumbers) with customers who need work done. Bringing trust, transparency, and quality assurance to Tanzania's informal construction sector.</p>
+                    <div class="project-tags"><span>Marketplace</span><span>Web</span><span>Mobile</span></div>
+                    <div class="project-links"><span style="font-size:0.8rem;color:var(--text-muted);">In development</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME: Siafu Code Challenge -->
+<section id="game">
+    <div class="container">
+        <div class="section-label reveal">Play</div>
+        <h2 class="section-title reveal">🐜 Siafu Code Challenge</h2>
+        <p class="section-subtitle reveal">Program your bot using embedded-style commands. Can you guide it to the target? Each level teaches real robotics logic — sequences, loops, and debugging.</p>
+
+        <div class="game-container reveal">
+            <div class="game-layout">
+                <div class="game-info">
+                    <div class="game-level-badge" id="gameLevelBadge">🤖 Level <span id="levelDisplay">1</span>/8</div>
+                    <h3 id="levelTitle">First Steps</h3>
+                    <p id="levelDesc">Move forward to reach the target. Think of this like writing firmware for a motor controller — one instruction at a time.</p>
+                    <div class="commands-panel">
+                        <h4>📦 Instruction Set</h4>
+                        <div class="commands-available" id="cmdPalette">
+                            <button class="cmd-btn" data-cmd="F">⬆️ Forward</button>
+                            <button class="cmd-btn" data-cmd="L">↰ Left</button>
+                            <button class="cmd-btn" data-cmd="R">↱ Right</button>
+                            <button class="cmd-btn" data-cmd="RE">🔁 Repeat</button>
+                        </div>
+                        <h4>📝 Your Program</h4>
+                        <div class="program-list" id="programList">
+                            <span style="font-size:0.7rem;color:var(--text-muted);width:100%;text-align:center;">Click instructions above to build your program</span>
+                        </div>
+                        <div class="game-controls">
+                            <button class="btn btn-primary" id="runBtn">▶ Run</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                            <button class="btn btn-outline" id="clearBtn">✕ Clear</button>
+                        </div>
+                        <div class="game-status" id="gameStatus">Drag instructions to program your bot. Click a step to remove it.</div>
                     </div>
-                    <div class="hero-stat">
-                        <h3>Depth</h3>
-                        <p>Robotics &bull; AI &bull; Languages</p>
+                </div>
+                <div class="game-grid-wrapper">
+                    <div class="game-grid" id="gameGrid" style="grid-template-columns: repeat(6, 1fr);"></div>
+                    <div class="game-score">
+                        Level <span id="scoreLevel">1</span> &bull; Best: <strong id="bestScore">—</strong> &bull; Total: <strong id="totalStars">0</strong> ⭐
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ===== ABOUT ===== -->
-    <section id="about">
-        <div class="container">
-            <div class="section-label reveal">Who I am</div>
-            <h2 class="section-title reveal">Building Africa's<br/>deep-tech future</h2>
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <p>
-                        I'm <strong>Ibrahim</strong>, a 19-year-old mechatronics engineering student from 
-                        <strong>Tanzania</strong>. I founded <strong>UMG Africa</strong> (Version Extreme Cooperation), 
-                        a holding company building deep-tech that matters — from physical 
-                        robotics to artificial intelligence.
-                    </p>
-                    <p>
-                        I grew up in Tanzania where I saw that the biggest challenges — 
-                        infrastructure, logistics, education, communication — are also the 
-                        biggest engineering opportunities. Instead of waiting for solutions 
-                        to come from abroad, I decided to build them myself.
-                    </p>
-                    <p>
-                        My mission: <strong>build a globally influential AI, robotics, 
-                        and engineering company that originates from Africa</strong>. 
-                        I believe the next wave of technological revolution won't come 
-                        from Silicon Valley alone — it will come from those who face 
-                        the hardest problems and choose to solve them.
-                    </p>
+<!-- Repeat count dialog -->
+<div class="repeat-dialog" id="repeatDialog">
+    <div class="repeat-dialog-inner glass">
+        <h4>🔁 How many times?</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;">Choose how many times to repeat the next commands</p>
+        <div>
+            <button class="btn btn-primary" data-rep="2">2×</button>
+            <button class="btn btn-primary" data-rep="3">3×</button>
+            <button class="btn btn-primary" data-rep="4">4×</button>
+            <button class="btn btn-outline" data-rep="5">5×</button>
+        </div>
+        <button style="margin-top:12px;" class="btn btn-outline" id="repCancel">Cancel</button>
+    </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container">
+        <div class="section-label reveal">What I know</div>
+        <h2 class="section-title reveal">Skills &amp; Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category reveal"><h4>💻 Software Engineering</h4><div class="skill-tags"><span>Python</span><span>Rust</span><span>JavaScript</span><span>Flask</span><span>React</span><span>Node.js</span><span>APIs</span><span>Databases</span></div></div>
+            <div class="skill-category reveal"><h4>🤖 Robotics &amp; Hardware</h4><div class="skill-tags"><span>KiCad</span><span>OpenSCAD</span><span>Webots</span><span>PCB Design</span><span>3D Printing</span><span>Embedded C</span><span>Sensors</span></div></div>
+            <div class="skill-category reveal"><h4>🧠 AI &amp; Language</h4><div class="skill-tags"><span>LLMs</span><span>Compiler Design</span><span>Swarm Intelligence</span><span>NLP</span><span>Computer Vision</span></div></div>
+            <div class="skill-category reveal"><h4>🚀 Startup &amp; Strategy</h4><div class="skill-tags"><span>Business Strategy</span><span>Product Design</span><span>Grant Writing</span><span>Fundraising</span><span>Compliance</span><span>Brand Building</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- YOUTUBE -->
+<section id="content">
+    <div class="container">
+        <div class="section-label reveal">Content</div>
+        <h2 class="section-title reveal">YouTube &amp; Media</h2>
+        <p class="section-subtitle reveal">I document the journey — building deep-tech in Tanzania, one video at a time.</p>
+        <div class="youtube-showcase reveal">
+            <div class="yt-card">
+                <div class="yt-text">
+                    <h3>SwarmMind YouTube</h3>
+                    <p>Educational tech content with Hormozi-style captions. I show the real process — PCB assembly, compiler bugs, robot tests. No fluff, no fake perfection. Just engineering as it actually happens in a Tanzanian dorm room-turned-lab.</p>
+                    <a href="#" target="_blank" class="yt-cta">▶ Subscribe on YouTube</a>
                 </div>
-                <div class="about-visual reveal">
-                    <div class="about-stat-card">
-                        <div class="icon">🧠</div>
-                        <h4><span>AI</span></h4>
-                        <p>Automation &amp; agents</p>
-                    </div>
-                    <div class="about-stat-card">
-                        <div class="icon">🤖</div>
-                        <h4><span>Robotics</span></h4>
-                        <p>Swarm intelligence</p>
-                    </div>
-                    <div class="about-stat-card">
-                        <div class="icon">⌨️</div>
-                        <h4><span>Languages</span></h4>
-                        <p>Compiler design</p>
-                    </div>
-                    <div class="about-stat-card">
-                        <div class="icon">🛰️</div>
-                        <h4><span>Space</span></h4>
-                        <p>Hydrolith systems</p>
-                    </div>
-                </div>
+                <div class="yt-visual">🎬</div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ===== VENTURES (FLYWHEEL) ===== -->
-    <section id="ventures">
-        <div class="container">
-            <div class="section-label reveal">The flywheel</div>
-            <h2 class="section-title reveal">UMG Africa<br/>Holding Company</h2>
-            <p class="section-subtitle reveal">
-                Software cash funds hardware R&amp;D. Hardware breakthroughs 
-                enable space technology. Each company feeds the next.
-            </p>
-
-            <div class="flywheel reveal">
-                <div class="flywheel-center">
-                    <h3>⚡ UMG Africa</h3>
-                    <p>Version Extreme Cooperation — Engineering Africa's Future</p>
-                </div>
-                <div class="flywheel-grid">
-                    <div class="flywheel-card">
-                        <span class="emoji">🌿</span>
-                        <h4>Olive AI</h4>
-                        <p>AI-powered WhatsApp agents for African businesses. Revenue tier.</p>
-                        <span class="tag">Cash Flow</span>
-                    </div>
-                    <div class="flywheel-card">
-                        <span class="emoji">🔗</span>
-                        <h4>Jenga Connect</h4>
-                        <p>Construction marketplace connecting fundis to customers.</p>
-                        <span class="tag">Cash Flow</span>
-                    </div>
-                    <div class="flywheel-card">
-                        <span class="emoji">🐜</span>
-                        <h4>Siafu Robotics</h4>
-                        <p>Swarm robotics — collective intelligence from simple agents.</p>
-                        <span class="tag">Hardware R&amp;D</span>
-                    </div>
-                    <div class="flywheel-card">
-                        <span class="emoji">👻</span>
-                        <h4>Ghost</h4>
-                        <p>A domain-specific systems programming language from scratch.</p>
-                        <span class="tag">Infrastructure</span>
-                    </div>
-                    <div class="flywheel-card">
-                        <span class="emoji">💧</span>
-                        <h4>Hydrolith</h4>
-                        <p>Space technology — long-term exploration infrastructure.</p>
-                        <span class="tag">Frontier</span>
-                    </div>
-                </div>
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container reveal">
+        <div class="contact-section">
+            <h3>Let's build something</h3>
+            <p>Whether you want to collaborate, invest, mentor, or just have a conversation about deep-tech in Africa — I'd love to hear from you.</p>
+            <div class="contact-links">
+                <a href="mailto:ibrahim@umgafrica.com" class="contact-link">📧 Email</a>
+                <a href="#" target="_blank" class="contact-link">💻 GitHub</a>
+                <a href="#" target="_blank" class="contact-link">🐦 X / Twitter</a>
+                <a href="#" target="_blank" class="contact-link">🔗 LinkedIn</a>
+                <a href="#" target="_blank" class="contact-link">▶ YouTube</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ===== PROJECTS ===== -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-label reveal">What I'm building</div>
-            <h2 class="section-title reveal">Featured Projects</h2>
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p><span class="brand">UMG Africa</span> &mdash; Engineering Africa's Future 🌍</p>
+        <p style="margin-top:6px;">&copy; 2026 Ibrahim. All rights reserved.</p>
+    </div>
+</footer>
 
-            <div class="projects-grid">
-                <!-- Siafu -->
-                <div class="project-card reveal">
-                    <div class="project-visual">
-                        <div class="glow" style="background:var(--green);"></div>
-                        🐜
-                    </div>
-                    <div class="project-info">
-                        <h3>Siafu Swarm Robotics</h3>
-                        <p>
-                            Bio-inspired swarm robots modelled on Siafu (Dorylus) ants. 
-                            Each agent is simple — collective intelligence emerges from 
-                            the swarm. Custom PCB design, OpenSCAD chassis, Webots 
-                            simulation, and real hardware. Named after the ant species 
-                            that builds bridges with their own bodies.
-                        </p>
-                        <div class="project-tags">
-                            <span>KiCad</span><span>OpenSCAD</span><span>Webots</span>
-                            <span>Python</span><span>Swarm Intelligence</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ibrahim/siafu-swarm" target="_blank">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ghost -->
-                <div class="project-card reverse reveal">
-                    <div class="project-visual">
-                        <div class="glow" style="background:var(--amber);"></div>
-                        👻
-                    </div>
-                    <div class="project-info">
-                        <h3>Ghost Programming Language</h3>
-                        <p>
-                            A domain-specific systems language built from scratch. 
-                            Alpha compiler in Rust with recursive descent parsing, 
-                            bytecode VM, and a growing standard library. Designed 
-                            for robotics and embedded systems — the language that 
-                            will eventually run on Siafu's onboard controller.
-                        </p>
-                        <div class="project-tags">
-                            <span>Rust</span><span>Compiler Design</span>
-                            <span>Bytecode VM</span><span>LLVM</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ibrahim/ghost" target="_blank">GitHub &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Olive AI -->
-                <div class="project-card reveal">
-                    <div class="project-visual">
-                        <div class="glow" style="background:var(--green);"></div>
-                        🌿
-                    </div>
-                    <div class="project-info">
-                        <h3>Olive AI</h3>
-                        <p>
-                            AI-powered WhatsApp agent platform for African businesses. 
-                            Automates customer service, lead qualification, and order 
-                            management through natural conversation. Multi-tenant SaaS 
-                            built with Flask, Twilio, and OpenAI — designed for 
-                            businesses that want AI without complexity.
-                        </p>
-                        <div class="project-tags">
-                            <span>Python</span><span>Flask</span><span>Twilio</span>
-                            <span>WhatsApp API</span><span>SaaS</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://oliveai.umgafrica.com" target="_blank">Website &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Jenga Connect -->
-                <div class="project-card reverse reveal">
-                    <div class="project-visual">
-                        <div class="glow" style="background:var(--amber);"></div>
-                        🔗
-                    </div>
-                    <div class="project-info">
-                        <h3>Jenga Connect</h3>
-                        <p>
-                            A construction marketplace connecting skilled fundis 
-                            (masons, electricians, plumbers) with customers who need 
-                            work done. Bringing trust, transparency, and quality 
-                            assurance to Tanzania's informal construction sector.
-                        </p>
-                        <div class="project-tags">
-                            <span>Marketplace</span><span>Web</span><span>Mobile</span>
-                        </div>
-                        <div class="project-links">
-                            <span style="font-size:0.8rem;color:var(--text-muted);">In development</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- CHATBOT -->
+<button class="chat-toggle" id="chatToggle" aria-label="Open chat">💬</button>
+<div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+        <div class="avatar">I</div>
+        <div class="info">
+            <h4>Ibrahim Assistant</h4>
+            <p>Ask me anything</p>
         </div>
-    </section>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-suggestions" id="chatSuggestions"></div>
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Ask about Ibrahim, projects, or skills..." autocomplete="off"/>
+        <button class="chat-send" id="chatSend">➤</button>
+    </div>
+</div>
 
-    <!-- ===== SKILLS ===== -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-label reveal">What I know</div>
-            <h2 class="section-title reveal">Skills &amp; Expertise</h2>
+<script>
+// ================================================================
+// 1. PROFILE PHOTO UPLOAD
+// ================================================================
+document.getElementById('photoUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const svg = document.querySelector('.profile-inner svg');
+            const img = document.getElementById('profileImg');
+            svg.style.display = 'none';
+            img.style.display = 'block';
+            img.src = ev.target.result;
+            // Save to localStorage so it persists
+            try { localStorage.setItem('profilePhoto', ev.target.result); } catch(e) {}
+        };
+        reader.readAsDataURL(file);
+    }
+});
+// Restore from localStorage
+try {
+    const saved = localStorage.getItem('profilePhoto');
+    if (saved) {
+        const svg = document.querySelector('.profile-inner svg');
+        const img = document.getElementById('profileImg');
+        svg.style.display = 'none';
+        img.style.display = 'block';
+        img.src = saved;
+    }
+} catch(e) {}
 
-            <div class="skills-grid">
-                <div class="skill-category reveal">
-                    <h4>💻 Software Engineering</h4>
-                    <div class="skill-tags">
-                        <span>Python</span><span>Rust</span><span>JavaScript</span>
-                        <span>Flask</span><span>React</span><span>Node.js</span>
-                        <span>APIs</span><span>Databases</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <h4>🤖 Robotics &amp; Hardware</h4>
-                    <div class="skill-tags">
-                        <span>KiCad</span><span>OpenSCAD</span><span>Webots</span>
-                        <span>PCB Design</span><span>3D Printing</span>
-                        <span>Embedded C</span><span>Sensors</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <h4>🧠 AI &amp; Language</h4>
-                    <div class="skill-tags">
-                        <span>LLMs</span><span>Compiler Design</span>
-                        <span>Swarm Intelligence</span><span>NLP</span>
-                        <span>Computer Vision</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <h4>🚀 Startup &amp; Strategy</h4>
-                    <div class="skill-tags">
-                        <span>Business Strategy</span><span>Product Design</span>
-                        <span>Grant Writing</span><span>Fundraising</span>
-                        <span>Compliance</span><span>Brand Building</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// ================================================================
+// 2. NAV
+// ================================================================
+document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
 
-    <!-- ===== YOUTUBE / CONTENT ===== -->
-    <section id="content">
-        <div class="container">
-            <div class="section-label reveal">Content</div>
-            <h2 class="section-title reveal">YouTube &amp; Media</h2>
-            <p class="section-subtitle reveal">
-                I document the journey — building deep-tech in Tanzania, 
-                one video at a time.
-            </p>
+// ================================================================
+// 3. SCROLL REVEAL
+// ================================================================
+new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }).observe(document.querySelector('.reveal'));
 
-            <div class="youtube-showcase reveal">
-                <div class="yt-card">
-                    <div class="yt-text">
-                        <h3>SwarmMind YouTube</h3>
-                        <p>
-                            Educational tech content with Hormozi-style captions. 
-                            I show the real process — PCB assembly, compiler bugs, 
-                            robot tests. No fluff, no fake perfection. Just 
-                            engineering as it actually happens in a Tanzanian 
-                            dorm room-turned-lab.
-                        </p>
-                        <a href="https://youtube.com/@ibrahim" target="_blank" class="yt-cta">
-                            ▶ Subscribe on YouTube
-                        </a>
-                    </div>
-                    <div class="yt-visual">🎬</div>
-                </div>
-            </div>
-        </div>
-    </section>
+// ================================================================
+// 4. GAME: Siafu Code Challenge
+// ================================================================
+const LEVELS = [
+    { title: "First Steps", desc: "Move forward to reach the target. One instruction is all you need.", grid: 6, bot: [0,2], target: [0,5], walls: [], solution: ["F","F","F"], stars: 1 },
+    { title: "Navigate the Corner", desc: "A right turn and some forward steps. Like routing a PCB trace around an obstacle.", grid: 6, bot: [0,0], target: [3,3], walls: [], solution: ["F","F","F","R","F","F","F"], stars: 2 },
+    { title: "The L-Path", desc: "Turn left and move. Simple, but one wrong turn and you'll hit a wall.", grid: 6, bot: [0,0], target: [3,3], walls: [[1,0],[2,2],[2,3],[2,4]], solution: ["F","F","F","L","F","F","F"], stars: 2 },
+    { title: "Zigzag", desc: "Multiple turns. Plan ahead — this is what real pathfinding looks like on a robot.", grid: 7, bot: [0,0], target: [6,6], walls: [[3,0],[3,1],[3,2],[3,3],[3,4],[3,5],[1,3],[2,3]], solution: ["F","F","F","R","F","F","F","L","F","F","F"], stars: 3 },
+    { title: "Loop Debut", desc: "Use a REPEAT block! When you see a pattern, loop it. This is why we write firmware.", grid: 6, bot: [0,0], target: [0,5], walls: [], solution: ["RE","F","F","F","F","F","RE"], stars: 2 },
+    { title: "The Spiral", desc: "A classic programming puzzle. Move in a spiral pattern to reach the center target.", grid: 7, bot: [2,2], target: [0,0], walls: [[1,1],[1,2],[1,3],[1,4],[2,4],[3,4],[3,3],[3,2],[3,1],[2,1]], solution: ["L","F","L","F","F","L","F","F","F","L","F","F","F","F"], stars: 3 },
+    { title: "Memory Challenge", desc: "Navigate without seeing the full path! Some cells are traps — you must deduce the safe route.", grid: 8, bot: [0,0], target: [7,7], walls: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[7,2],[6,2],[5,2],[4,2],[3,2],[2,2],[1,2],[0,2]], solution: ["F","F","F","F","F","F","F","R","F","F","F","F","F","F","F","L","F","F","F","F","F","F","F"], stars: 4 },
+    { title: "Siafu Finale", desc: "The ultimate test. Use everything you've learned — sequences, turns, and patterns. Real swarm logic.", grid: 8, bot: [0,0], target: [7,7], walls: [[3,0],[3,1],[3,2],[3,4],[3,5],[3,6],[1,3],[2,3],[4,3],[5,3],[6,3],[3,3]], solution: ["F","F","F","R","F","F","F","L","F","F","F"], stars: 5 }
+];
 
-    <!-- ===== CONTACT ===== -->
-    <section id="contact">
-        <div class="container reveal">
-            <div class="contact-section">
-                <h3>Let's build something</h3>
-                <p>
-                    Whether you want to collaborate, invest, mentor, or just 
-                    have a conversation about deep-tech in Africa — I'd love 
-                    to hear from you.
-                </p>
-                <div class="contact-links">
-                    <a href="mailto:ibrahim@umgafrica.com" class="contact-link">
-                        📧 ibrahim@umgafrica.com
-                    </a>
-                    <a href="https://github.com/ibrahim" target="_blank" class="contact-link">
-                        💻 GitHub
-                    </a>
-                    <a href="https://twitter.com/ibrahim" target="_blank" class="contact-link">
-                        🐦 X / Twitter
-                    </a>
-                    <a href="https://linkedin.com/in/ibrahim" target="_blank" class="contact-link">
-                        🔗 LinkedIn
-                    </a>
-                    <a href="https://youtube.com/@ibrahim" target="_blank" class="contact-link">
-                        ▶ YouTube
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+let currentLevel = 0;
+let program = [];
+let isRunning = false;
+let canAcceptRepeat = false;
 
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="container">
-            <p>
-                <span class="brand">UMG Africa</span> &mdash; 
-                Engineering Africa's Future 🌍
-            </p>
-            <p style="margin-top:6px;">
-                &copy; 2026 Ibrahim. All rights reserved.
-            </p>
-        </div>
-    </footer>
+// Load saved progress
+let savedLevel = 0;
+try { savedLevel = parseInt(localStorage.getItem('siafuLevel') || '0'); } catch(e) {}
+let bestScores = {};
+try { bestScores = JSON.parse(localStorage.getItem('siafuScores') || '{}'); } catch(e) {}
 
-    <!-- ===== JAVASCRIPT ===== -->
-    <script>
-        // ---- Mobile Nav Toggle ----
-        const toggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
+function renderGrid() {
+    const lv = LEVELS[currentLevel];
+    const grid = document.getElementById('gameGrid');
+    const size = lv.grid;
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.innerHTML = '';
+
+    // Compute cell size based on grid dimension
+    const cellSize = size <= 6 ? 48 : (size <= 7 ? 40 : 32);
+    document.querySelectorAll('.game-cell').forEach(c => c.style.width = cellSize + 'px');
+    document.querySelectorAll('.game-cell').forEach(c => c.style.height = cellSize + 'px');
+
+    for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+            const cell = document.createElement('div');
+            cell.className = 'game-cell';
+            cell.dataset.r = r;
+            cell.dataset.c = c;
+            cell.style.width = cellSize + 'px';
+            cell.style.height = cellSize + 'px';
+
+            if (lv.walls.some(w => w[0] === r && w[1] === c)) {
+                cell.classList.add('obstacle');
+            } else if (lv.target[0] === r && lv.target[1] === c) {
+                cell.classList.add('target');
+                cell.innerHTML = '<span class="game-target">⚡</span>';
+            }
+            grid.appendChild(cell);
+        }
+    }
+
+    // Place bot
+    updateBotPosition(lv.bot[0], lv.bot[1]);
+}
+
+function updateBotPosition(r, c) {
+    // Clear previous bot
+    document.querySelectorAll('.game-bot').forEach(el => el.remove());
+    const cells = document.querySelectorAll('.game-cell');
+    const idx = r * LEVELS[currentLevel].grid + c;
+    if (cells[idx]) {
+        const bot = document.createElement('span');
+        bot.className = 'game-bot';
+        bot.textContent = '🐜';
+        cells[idx].appendChild(bot);
+        cells[idx].classList.add('bot');
+    }
+}
+
+function getCell(r, c) {
+    const size = LEVELS[currentLevel].grid;
+    return document.querySelectorAll('.game-cell')[r * size + c];
+}
+
+function updateUI() {
+    const lv = LEVELS[currentLevel];
+    document.getElementById('levelDisplay').textContent = currentLevel + 1;
+    document.getElementById('levelTitle').textContent = lv.title;
+    document.getElementById('levelDesc').textContent = lv.desc;
+    document.getElementById('scoreLevel').textContent = currentLevel + 1;
+    document.getElementById('gameLevelBadge').innerHTML = `🤖 Level <span>${currentLevel + 1}</span>/${LEVELS.length}`;
+
+    // Best score
+    const star = bestScores[currentLevel] || '-';
+    document.getElementById('bestScore').textContent = star === '-' ? '—' : '⭐'.repeat(star);
+
+    // Total stars
+    let total = 0;
+    for (let i = 0; i < currentLevel; i++) {
+        total += bestScores[i] || 0;
+    }
+    document.getElementById('totalStars').textContent = total;
+
+    // Update program list
+    renderProgram();
+}
+
+function renderProgram() {
+    const list = document.getElementById('programList');
+    if (program.length === 0) {
+        list.innerHTML = '<span style="font-size:0.7rem;color:var(--text-muted);width:100%;text-align:center;">Click instructions above to build your program</span>';
+        return;
+    }
+    list.innerHTML = '';
+    program.forEach((cmd, i) => {
+        const step = document.createElement('span');
+        step.className = 'program-step' + (cmd.type === 'RE' ? ' loop-start' : '');
+        step.innerHTML = `<span>${cmd.label}</span><span class="rm">✕</span>`;
+        step.title = 'Click to remove';
+        step.addEventListener('click', () => {
+            program.splice(i, 1);
+            renderProgram();
         });
-        // Close on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => navLinks.classList.remove('open'));
-        });
+        list.appendChild(step);
+    });
+}
 
-        // ---- Nav scroll effect ----
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 60);
-        });
+// Add command to program
+document.querySelectorAll('.cmd-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (isRunning) return;
+        const cmd = btn.dataset.cmd;
+        if (cmd === 'RE') {
+            canAcceptRepeat = true;
+            document.getElementById('repeatDialog').classList.add('open');
+            return;
+        }
+        const map = { 'F': { type: 'F', label: '⬆️ F' }, 'L': { type: 'L', label: '↰ L' }, 'R': { type: 'R', label: '↱ R' } };
+        if (map[cmd]) {
+            program.push(map[cmd]);
+            renderProgram();
+        }
+    });
+});
 
-        // ---- Scroll Reveal (Intersection Observer) ----
-        const revealElements = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        revealElements.forEach(el => observer.observe(el));
+// Repeat dialog
+document.querySelectorAll('[data-rep]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const n = parseInt(btn.dataset.rep);
+        program.push({ type: 'RE', label: `🔁×${n}`, count: n });
+        document.getElementById('repeatDialog').classList.remove('open');
+        // Add a matching end marker (invisible, used during execution)
+        program.push({ type: 'RE_END', label: `🔁 End`, count: n });
+        renderProgram();
+        canAcceptRepeat = false;
+    });
+});
+document.getElementById('repCancel').addEventListener('click', () => {
+    document.getElementById('repeatDialog').classList.remove('open');
+    canAcceptRepeat = false;
+});
 
-        // ---- Active nav link on scroll ----
-        const sections = document.querySelectorAll('section[id]');
-        const navAnchors = navLinks.querySelectorAll('a:not(.nav-cta)');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const top = section.offsetTop - 120;
-                if (window.scrollY >= top) current = section.id;
-            });
-            navAnchors.forEach(a => {
-                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-            });
-        });
+// Clear
+document.getElementById('clearBtn').addEventListener('click', () => {
+    if (isRunning) return;
+    program = [];
+    renderProgram();
+    document.getElementById('gameStatus').textContent = 'Program cleared. Build a new sequence!';
+    document.getElementById('gameStatus').className = 'game-status';
+});
 
-        // ---- Smooth reveal stagger for cards ----
-        document.querySelectorAll('.project-card, .flywheel-card, .skill-category, .about-stat-card').forEach((el, i) => {
-            el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+// Reset level
+document.getElementById('resetBtn').addEventListener('click', () => {
+    if (isRunning) return;
+    renderGrid();
+    updateUI();
+    document.getElementById('gameStatus').textContent = 'Level reset. Try again!';
+    document.getElementById('gameStatus').className = 'game-status';
+});
+
+// Run
+document.getElementById('runBtn').addEventListener('click', runProgram);
+
+function runProgram() {
+    if (isRunning) return;
+    if (program.length === 0) {
+        document.getElementById('gameStatus').textContent = '⚠️ Your program is empty! Add some instructions.';
+        document.getElementById('gameStatus').className = 'game-status';
+        return;
+    }
+
+    isRunning = true;
+    document.getElementById('runBtn').disabled = true;
+    document.getElementById('gameStatus').textContent = '⚙️ Executing firmware...';
+    document.getElementById('gameStatus').className = 'game-status';
+
+    renderGrid();
+    const lv = LEVELS[currentLevel];
+    let r = lv.bot[0], c = lv.bot[1];
+    let dir = 0; // 0=up, 1=right, 2=down, 3=left
+    const size = lv.grid;
+
+    // Flatten program (expand loops)
+    const steps = [];
+    let i = 0;
+    while (i < program.length) {
+        if (program[i].type === 'RE') {
+            const count = program[i].count;
+            // Collect commands until RE_END
+            i++;
+            const inner = [];
+            while (i < program.length && program[i].type !== 'RE_END') {
+                inner.push(program[i]);
+                i++;
+            }
+            // Skip RE_END
+            i++;
+            // Add inner commands count times
+            for (let n = 0; n < count; n++) {
+                steps.push(...inner.map(cmd => cmd.type));
+            }
+        } else {
+            steps.push(program[i].type);
+            i++;
+        }
+    }
+
+    // Execute step by step
+    let stepIdx = 0;
+    let success = false;
+
+    function executeStep() {
+        if (stepIdx >= steps.length) {
+            // Done executing
+            finishRun(r, c);
+            return;
+        }
+
+        const cmd = steps[stepIdx];
+        stepIdx++;
+
+        // Clear path highlights
+        document.querySelectorAll('.game-cell.path').forEach(el => el.classList.remove('path'));
+        document.querySelectorAll('.game-cell.bot').forEach(el => el.classList.remove('bot'));
+
+        // Update position
+        const prevR = r, prevC = c;
+        if (cmd === 'F') {
+            if (dir === 0) r--;
+            else if (dir === 1) c++;
+            else if (dir === 2) r++;
+            else if (dir === 3) c--;
+        } else if (cmd === 'L') {
+            dir = (dir + 3) % 4;
+        } else if (cmd === 'R') {
+            dir = (dir + 1) % 4;
+        }
+
+        // Check boundaries and obstacles
+        if (r < 0 || r >= size || c < 0 || c >= size) {
+            // Hit wall
+            r = prevR;
+            c = prevC;
+            document.getElementById('gameStatus').textContent = '💥 OUT OF BOUNDS! Your bot hit the edge.';
+            document.getElementById('gameStatus').className = 'game-status lose';
+            endRun(false);
+            return;
+        }
+        if (lv.walls.some(w => w[0] === r && w[1] === c)) {
+            // Hit obstacle
+            r = prevR;
+            c = prevC;
+            document.getElementById('gameStatus').textContent = '🔥 CRASH! Your bot hit an obstacle. Debug and retry.';
+            document.getElementById('gameStatus').className = 'game-status lose';
+            endRun(false);
+            return;
+        }
+
+        // Highlight path
+        if (prevR !== r || prevC !== c) {
+            const prevCell = getCell(prevR, prevC);
+            if (prevCell) prevCell.classList.add('path');
+        }
+
+        // Update bot position
+        updateBotPosition(r, c);
+
+        // Rotate bot emoji based on direction
+        const botEl = document.querySelector('.game-bot');
+        if (botEl) {
+            botEl.style.transform = `rotate(${dir * 90}deg)`;
+            botEl.style.display = 'inline-block';
+        }
+
+        // Check win
+        if (r === lv.target[0] && c === lv.target[1]) {
+            finishRun(r, c, true);
+            return;
+        }
+
+        // Next step with delay
+        setTimeout(executeStep, 300);
+    }
+
+    function finishRun(rr, cc, won) {
+        if (won) {
+            document.getElementById('gameStatus').textContent = '🎉 SUCCESS! Your bot reached the target!';
+            document.getElementById('gameStatus').className = 'game-status win';
+            endRun(true);
+        } else {
+            if (rr === lv.target[0] && cc === lv.target[1]) {
+                document.getElementById('gameStatus').textContent = '🎉 SUCCESS!';
+                document.getElementById('gameStatus').className = 'game-status win';
+                endRun(true);
+            } else {
+                document.getElementById('gameStatus').textContent = '📡 Bot stopped. The target is still ahead. Try again!';
+                document.getElementById('gameStatus').className = 'game-status';
+                endRun(false);
+            }
+        }
+    }
+
+    function endRun(won) {
+        isRunning = false;
+        document.getElementById('runBtn').disabled = false;
+        if (won) {
+            // Calculate stars based on efficiency
+            const solutionLen = lv.solution.length;
+            const usedLen = steps.length;
+            let stars = 1;
+            if (usedLen <= solutionLen + 2) stars = lv.stars;
+            else if (usedLen <= solutionLen * 1.5) stars = Math.max(1, lv.stars - 1);
+            else stars = Math.max(1, lv.stars - 2);
+
+            // Update best score
+            const prev = bestScores[currentLevel] || 0;
+            if (stars > prev) {
+                bestScores[currentLevel] = stars;
+                try { localStorage.setItem('siafuScores', JSON.stringify(bestScores)); } catch(e) {}
+            }
+
+            // Save progress (unlock next level)
+            if (currentLevel < LEVELS.length - 1) {
+                try { localStorage.setItem('siafuLevel', String(currentLevel + 1)); } catch(e) {}
+            }
+
+            updateUI();
+            document.getElementById('gameStatus').textContent += ` ⭐ Rating: ${'⭐'.repeat(stars)}`;
+        }
+    }
+
+    // Start with a small delay
+    setTimeout(executeStep, 200);
+}
+
+// Init game
+function initGame() {
+    const startLevel = Math.min(savedLevel, LEVELS.length - 1);
+    currentLevel = startLevel;
+    renderGrid();
+    updateUI();
+}
+
+initGame();
+
+// ================================================================
+// 5. CHATBOT
+// ================================================================
+const chatData = {
+    greetings: [/hello/i, /hi/i, /hey/i, /greetings/i, /morning/i, /evening/i, /good (day|afternoon)/i],
+    aboutMe: {
+        keywords: [/who (are you|is ibrahim)/i, /tell me about (yourself|ibrahim|you)/i, /about/i, /background/i, /story/i],
+        response: "Ibrahim is a 19-year-old Tanzanian mechatronics engineering student and the founder of UMG Africa (Version Extreme Cooperation). He builds deep-tech — swarm robotics (Siafu), AI agents (Olive AI), programming languages (Ghost), and space technology (Hydrolith). His mission is to build a globally influential AI/robotics/engineering company that originates from Africa. 🌍"
+    },
+    projects: {
+        keywords: [/project/i, /building/i, /what (do|does) (you|he) build/i, /products/i, /work/i, /portfolio/i, /companies/i, /subsidiaries/i],
+        response: "Ibrahim runs 5 ventures under UMG Africa:\n🌿 **Olive AI** — AI WhatsApp agents for African businesses\n🔗 **Jenga Connect** — Construction marketplace\n🐜 **Siafu Robotics** — Swarm robotics (bio-inspired ant robots)\n👻 **Ghost** — A domain-specific systems programming language\n💧 **Hydrolith** — Space exploration technology\n\nCheck the #ventures section for the full flywheel!"
+    },
+    siafu: {
+        keywords: [/siafu/i, /robot/i, /swarm/i, /ant/i],
+        response: "Siafu Robotics is Ibrahim's swarm robotics project — named after the Dorylus (Siafu) ant species. Each robot is a simple agent, but collectively they exhibit complex swarm intelligence. Built with custom KiCad PCBs, OpenSCAD chassis, and Webots simulation. He's building real hardware, not just simulations. 🐜🤖"
+    },
+    olive: {
+        keywords: [/olive/i, /ai agent/i, /whatsapp/i, /chatbot/i],
+        response: "Olive AI is an AI-powered WhatsApp agent platform for African businesses. It handles customer service, lead qualification, and order management automatically. Built with Python/Flask, Twilio, and OpenAI — designed as multi-tenant SaaS. Currently in pre-launch, onboarding first clients. 🌿"
+    },
+    ghost: {
+        keywords: [/ghost/i, /language/i, /compiler/i, /programming language/i],
+        response: "Ghost is a domain-specific systems programming language built from scratch by Ibrahim. It has an alpha compiler in Rust with recursive descent parsing and a bytecode VM. Eventually it'll run on Siafu's onboard controllers. Real compiler engineering from Tanzania. 👻"
+    },
+    skills: {
+        keywords: [/skill/i, /expertise/i, /know|knows/i, /tech stack/i, /technology/i, /tools/i],
+        response: "Ibrahim's key skills:\n💻 **Software**: Python, Rust, JavaScript, Flask, React, Node.js\n🤖 **Robotics**: KiCad, OpenSCAD, Webots, PCB Design, 3D Printing\n🧠 **AI**: LLMs, Compiler Design, Swarm Intelligence, NLP\n🚀 **Startup**: Strategy, Product Design, Grant Writing, Fundraising\n\nSee the #skills section for the full breakdown!"
+    },
+    contact: {
+        keywords: [/contact/i, /email/i, /reach/i, /message/i, /get in touch/i, /hire/i, /collaborate/i, /work with/i],
+        response: "You can reach Ibrahim at **ibrahim@umgafrica.com** or connect via the social links in the #contact section. He's open to collaborations, grants, mentorship, and investment conversations. 🤝"
+    },
+    game: {
+        keywords: [/game/i, /siafu code/i, /challenge/i, /play/i, /puzzle/i],
+        response: "Try the **Siafu Code Challenge** 🐜 in the #game section! It's a visual programming puzzle where you guide a robot using embedded-style commands. 8 levels that teach real robotics logic — sequences, loops, and debugging. Your progress is saved in your browser. Can you beat all 8 levels? ⭐"
+    },
+    education: {
+        keywords: [/education/i, /student/i, /study/i, /school/i, /university/i, /mechatronics/i, /degree/i],
+        response: "Ibrahim is a mechatronics engineering student in Tanzania. He's 19 years old and started building companies while studying — applying what he learns in the classroom directly to real hardware and software projects."
+    },
+    age: {
+        keywords: [/how old/i, /19/i, /age/i, /young/i],
+        response: "Ibrahim is 19 years old. He believes being young is an advantage — he has decades ahead to compound his learning and impact. Age is just a number; execution is what matters. 💪"
+    },
+    location: {
+        keywords: [/tanzania/i, /africa/i, /live|living/i, /located/i, /where/i, /dar/i],
+        response: "Ibrahim is based in **Tanzania**, East Africa. He's building everything from a dorm room that doubles as a robotics lab, compiler workstation, and AI server room. Engineering Africa's future, literally from the ground up. 🌍"
+    },
+    help: {
+        keywords: [/help/i, /what can you/i, /capabilities/i, /commands/i, /options/i],
+        response: "I can tell you about:\n👤 **Ibrahim** — his background, mission, story\n🏢 **UMG Africa** — the holding company and all 5 subsidiaries\n🐜 **Siafu Code Challenge** — the embedded systems game\n🔧 **Projects & Skills** — what he's building and what he knows\n📬 **Contact** — how to reach him\n\nJust ask me anything! 😊"
+    }
+};
+
+function getBotResponse(input) {
+    const lower = input.toLowerCase().trim();
+
+    // Check for greetings first
+    for (const pattern of chatData.greetings) {
+        if (pattern.test(lower)) {
+            const greetings = [
+                "Hey there! 👋 I'm Ibrahim's virtual assistant. Ask me anything about his work, projects, or background!",
+                "Hello! Welcome to Ibrahim's portfolio. What would you like to know? 🤖",
+                "Hi! Great to have you here. Ibrahim's building some incredible deep-tech — ask me about any of it! 🌍"
+            ];
+            return greetings[Math.floor(Math.random() * greetings.length)];
+        }
+    }
+
+    // Check all intent categories
+    for (const [key, data] of Object.entries(chatData)) {
+        if (key === 'greetings' || !data.keywords) continue;
+        for (const pattern of data.keywords) {
+            if (pattern.test(lower)) {
+                return data.response;
+            }
+        }
+    }
+
+    // Default responses
+    const defaults = [
+        "That's an interesting question! I'm not sure I have the answer yet. Try asking about Ibrahim's **projects**, **skills**, or **UMG Africa** ventures. Or type 'help' to see what I can do! 😊",
+        "Great question! I don't have that info stored, but I can tell you about Ibrahim's **background**, his **companies** (Olive AI, Siafu Robotics, Ghost, Jenga Connect, Hydrolith), or the **Siafu Code Challenge** game. What interests you? 🤔",
+        "I'd love to help with that! Try asking about **Ibrahim's story**, his **projects**, or check out the **game** section. You can also type 'help' for a full list of topics. 🌟"
+    ];
+    return defaults[Math.floor(Math.random() * defaults.length)];
+}
+
+function addChatMessage(text, sender) {
+    const container = document.getElementById('chatMessages');
+    const msg = document.createElement('div');
+    msg.className = `chat-msg ${sender}`;
+    // Support basic markdown-style bold
+    text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // Newlines to breaks
+    text = text.replace(/\n/g, '<br>');
+    msg.innerHTML = text;
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+}
+
+function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    addChatMessage(text, 'user');
+    input.value = '';
+
+    // Show typing indicator
+    setTimeout(() => {
+        const response = getBotResponse(text);
+        addChatMessage(response, 'bot');
+        updateSuggestions(text);
+    }, 300 + Math.random() * 400);
+}
+
+function updateSuggestions(lastInput) {
+    const container = document.getElementById('chatSuggestions');
+    const lower = lastInput.toLowerCase();
+
+    // Suggest context-relevant follow-ups
+    let suggestions = [];
+    if (lower.includes('project') || lower.includes('build')) {
+        suggestions = ['Tell me about Siafu', 'What is Olive AI?', 'Tell me about Ghost'];
+    } else if (lower.includes('siafu') || lower.includes('robot')) {
+        suggestions = ['Try the Siafu Game', 'What are swarm robots?', 'Skills used in robotics'];
+    } else if (lower.includes('game') || lower.includes('play')) {
+        suggestions = ['How to play?', 'What are the levels?', 'Tell me about the creator'];
+    } else if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey')) {
+        suggestions = ['Who is Ibrahim?', 'What does UMG Africa do?', 'Show me projects'];
+    } else {
+        suggestions = ['Who is Ibrahim?', 'What projects?', 'Try the game!', 'Contact info'];
+    }
+
+    container.innerHTML = suggestions.map(s =>
+        `<span class="chat-suggestion">${s}</span>`
+    ).join('');
+
+    container.querySelectorAll('.chat-suggestion').forEach(el => {
+        el.addEventListener('click', () => {
+            document.getElementById('chatInput').value = el.textContent;
+            sendChatMessage();
         });
-    </script>
+    });
+}
+
+// Init chat
+document.getElementById('chatSend').addEventListener('click', sendChatMessage);
+document.getElementById('chatInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendChatMessage();
+});
+
+// Add initial greeting
+setTimeout(() => {
+    addChatMessage("👋 Hi! I'm Ibrahim's virtual assistant. Ask me about his background, projects, the Siafu Code Challenge game, or anything UMG Africa-related!", 'bot');
+    updateSuggestions('hello');
+}, 500);
+
+// Chat toggle
+const chatToggle = document.getElementById('chatToggle');
+const chatPanel = document.getElementById('chatPanel');
+let chatOpen = false;
+
+chatToggle.addEventListener('click', () => {
+    chatOpen = !chatOpen;
+    chatPanel.classList.toggle('open', chatOpen);
+    chatToggle.classList.toggle('active', chatOpen);
+    chatToggle.textContent = chatOpen ? '✕' : '💬';
+    if (chatOpen) {
+        document.getElementById('chatInput').focus();
+    }
+});
+
+// ================================================================
+// 6. ACTIVE NAV LINK
+// ================================================================
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    document.querySelectorAll('#navLinks a:not(.nav-cta)').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+});
+</script>
 </body>
 </html>
