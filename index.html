@@ -814,9 +814,13 @@ window.addEventListener('scroll', () => {
 // ================================================================
 // 3. SCROLL REVEAL
 // ================================================================
-new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }).observe(document.querySelector('.reveal'));
+document.querySelectorAll('.reveal').forEach(el => {
+    new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }).observe(el);
+});
 
 // ================================================================
 // 4. GAME: Siafu Code Challenge
