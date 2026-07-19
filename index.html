@@ -199,96 +199,6 @@
         .project-card.reverse { direction: rtl; }
         .project-card.reverse > * { direction: ltr; }
 
-        /* GAME SECTION */
-        #game { position: relative; }
-        .game-container {
-            margin-top: 48px; background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 32px; overflow: hidden;
-        }
-        .game-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
-        .game-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
-        .game-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
-        .game-level-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2);
-            padding: 4px 14px; border-radius: 100px; font-size: 0.75rem; color: var(--green); margin-bottom: 12px;
-        }
-        .game-grid-wrapper { display: flex; flex-direction: column; align-items: center; }
-        .game-grid {
-            display: grid; gap: 3px; background: rgba(255,255,255,0.03);
-            border: 1px solid var(--glass-border); border-radius: 10px; padding: 8px;
-            width: fit-content;
-        }
-        .game-cell {
-            width: 48px; height: 48px; border-radius: 6px;
-            background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; transition: all 0.2s; position: relative;
-        }
-        .game-cell.wall { background: rgba(255,255,255,0.08); }
-        .game-cell.target { background: rgba(245,179,66,0.15); box-shadow: inset 0 0 20px rgba(245,179,66,0.1); }
-        .game-cell.bot { background: rgba(0,212,170,0.15); }
-        .game-cell.path { animation: pathPulse 0.5s ease; }
-        @keyframes pathPulse { 0% { background: rgba(0,212,170,0.3); } 100% { background: rgba(0,212,170,0.05); } }
-        .game-bot { font-size: 1.6rem; filter: drop-shadow(0 0 6px rgba(0,212,170,0.5)); }
-        .game-target { font-size: 1.6rem; }
-        .game-cell.obstacle { background: rgba(255,80,80,0.1); }
-        .game-cell.obstacle::after { content: 'X'; color: rgba(255,80,80,0.4); font-weight: 700; font-size: 1.2rem; }
-
-        .commands-panel {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
-            border-radius: 10px; padding: 16px; margin-top: 16px;
-        }
-        .commands-panel h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
-        .commands-available { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-        .cmd-btn {
-            padding: 6px 14px; border-radius: 6px; border: 1px solid var(--glass-border);
-            background: rgba(255,255,255,0.04); color: var(--text); font-size: 0.75rem;
-            cursor: pointer; transition: all 0.2s; font-family: inherit;
-        }
-        .cmd-btn:hover { background: rgba(0,212,170,0.1); border-color: var(--green); }
-        .cmd-btn.added { background: rgba(0,212,170,0.15); border-color: var(--green); }
-        .program-list {
-            display: flex; gap: 4px; flex-wrap: wrap; min-height: 36px;
-            padding: 8px; background: rgba(0,0,0,0.2); border-radius: 6px; border: 1px dashed var(--glass-border);
-            margin-bottom: 12px;
-        }
-        .program-step {
-            padding: 4px 10px; border-radius: 4px; background: rgba(0,212,170,0.12);
-            border: 1px solid rgba(0,212,170,0.2); font-size: 0.7rem; cursor: pointer;
-            transition: all 0.15s; display: flex; align-items: center; gap: 4px;
-        }
-        .program-step:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.3); }
-        .program-step .rm { font-size: 0.6rem; opacity: 0.5; }
-        .program-step:hover .rm { opacity: 1; }
-        .program-step.loop-start { background: rgba(245,179,66,0.12); border-color: rgba(245,179,66,0.2); }
-        .program-step.loop-end { background: rgba(245,179,66,0.12); border-color: rgba(245,179,66,0.2); }
-
-        .game-controls { display: flex; gap: 8px; margin-top: 12px; }
-        .game-controls .btn { padding: 8px 20px; font-size: 0.8rem; }
-        .game-controls .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-        .game-status {
-            margin-top: 12px; font-size: 0.8rem; color: var(--text-muted);
-            padding: 8px 14px; border-radius: 6px; background: rgba(255,255,255,0.02);
-            min-height: 32px; display: flex; align-items: center;
-        }
-        .game-status.win { color: var(--green); background: rgba(0,212,170,0.08); }
-        .game-status.lose { color: #ff6b6b; background: rgba(255,80,80,0.08); }
-        .game-score { text-align: center; margin-top: 16px; font-size: 0.85rem; color: var(--text-muted); }
-        .game-score strong { color: var(--green); }
-
-        .repeat-dialog {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
-            display: none; align-items: center; justify-content: center;
-        }
-        .repeat-dialog.open { display: flex; }
-        .repeat-dialog-inner {
-            background: #14141e; border: 1px solid var(--glass-border);
-            border-radius: var(--radius); padding: 28px; max-width: 340px; text-align: center;
-        }
-        .repeat-dialog-inner h4 { font-size: 1rem; margin-bottom: 16px; }
-        .repeat-dialog-inner .btn { margin: 4px; }
-
         /* SKILLS */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 16px; margin-top: 48px; }
         .skill-category { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 24px; transition: all 0.3s; }
@@ -414,8 +324,6 @@
             .hero-actions { justify-content: center; }
             .hero-stats { justify-content: center; }
             .profile-frame { width: 240px; height: 240px; }
-            .game-layout { grid-template-columns: 1fr; }
-            .game-info { text-align: center; }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; flex-direction: column; background: rgba(8,8,14,0.98); position: absolute; top: 60px; left: 0; right: 0; padding: 20px 24px; gap: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -430,9 +338,6 @@
             .flywheel-grid { grid-template-columns: 1fr 1fr; }
             .about-visual { grid-template-columns: 1fr 1fr; }
             .chat-panel { width: calc(100vw - 32px); right: 16px; bottom: 80px; max-height: 480px; }
-            .game-cell { width: 36px; height: 36px; font-size: 1rem; }
-            .game-bot { font-size: 1.2rem; }
-            .game-target { font-size: 1.2rem; }
         }
         @media (max-width: 480px) {
             .flywheel-grid { grid-template-columns: 1fr; }
@@ -440,9 +345,6 @@
             section { padding: 60px 0; }
             .hero-actions { flex-direction: column; }
             .btn { width: 100%; justify-content: center; }
-            .game-cell { width: 30px; height: 30px; font-size: 0.85rem; }
-            .game-bot { font-size: 1rem; }
-            .game-target { font-size: 1rem; }
         }
     </style>
 </head>
@@ -462,7 +364,6 @@
             <a href="#about">About</a>
             <a href="#ventures">Ventures</a>
             <a href="#projects">Projects</a>
-            <a href="#game">Game</a>
             <a href="#skills">Skills</a>
             <a href="#contact" class="nav-cta">Connect</a>
         </div>
@@ -597,7 +498,7 @@
                     <h3>Siafu Swarm Robotics</h3>
                     <p>Bio-inspired swarm robots modelled on Siafu (Dorylus) ants. Each agent is simple — collective intelligence emerges from the swarm. Custom PCB design, OpenSCAD chassis, Webots simulation, and real hardware. Named after the ant species that builds bridges with their own bodies.</p>
                     <div class="project-tags"><span>KiCad</span><span>OpenSCAD</span><span>Webots</span><span>Python</span><span>Swarm Intelligence</span></div>
-                    <div class="project-links"><a href="#" target="_blank">GitHub &rarr;</a></div>
+                    <div class="project-links"><a href="https://github.com/abdullibrahim733-pixel" target="_blank">GitHub &rarr;</a></div>
                 </div>
             </div>
             <div class="project-card reverse reveal">
@@ -606,7 +507,7 @@
                     <h3>Ghost Programming Language</h3>
                     <p>A domain-specific systems language built from scratch. Alpha compiler in Rust with recursive descent parsing, bytecode VM, and a growing standard library. Designed for robotics and embedded systems — the language that will eventually run on Siafu's onboard controller.</p>
                     <div class="project-tags"><span>Rust</span><span>Compiler Design</span><span>Bytecode VM</span></div>
-                    <div class="project-links"><a href="#" target="_blank">GitHub &rarr;</a></div>
+                    <div class="project-links"><a href="https://github.com/abdullibrahim733-pixel" target="_blank">GitHub &rarr;</a></div>
                 </div>
             </div>
             <div class="project-card reveal">
@@ -630,65 +531,6 @@
         </div>
     </div>
 </section>
-
-<!-- GAME: Siafu Code Challenge -->
-<section id="game">
-    <div class="container">
-        <div class="section-label reveal">Play</div>
-        <h2 class="section-title reveal">🐜 Siafu Code Challenge</h2>
-        <p class="section-subtitle reveal">Program your bot using embedded-style commands. Can you guide it to the target? Each level teaches real robotics logic — sequences, loops, and debugging.</p>
-
-        <div class="game-container reveal">
-            <div class="game-layout">
-                <div class="game-info">
-                    <div class="game-level-badge" id="gameLevelBadge">🤖 Level <span id="levelDisplay">1</span>/8</div>
-                    <h3 id="levelTitle">First Steps</h3>
-                    <p id="levelDesc">Move forward to reach the target. Think of this like writing firmware for a motor controller — one instruction at a time.</p>
-                    <div class="commands-panel">
-                        <h4>📦 Instruction Set</h4>
-                        <div class="commands-available" id="cmdPalette">
-                            <button class="cmd-btn" data-cmd="F">⬆️ Forward</button>
-                            <button class="cmd-btn" data-cmd="L">↰ Left</button>
-                            <button class="cmd-btn" data-cmd="R">↱ Right</button>
-                            <button class="cmd-btn" data-cmd="RE">🔁 Repeat</button>
-                        </div>
-                        <h4>📝 Your Program</h4>
-                        <div class="program-list" id="programList">
-                            <span style="font-size:0.7rem;color:var(--text-muted);width:100%;text-align:center;">Click instructions above to build your program</span>
-                        </div>
-                        <div class="game-controls">
-                            <button class="btn btn-primary" id="runBtn">▶ Run</button>
-                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
-                            <button class="btn btn-outline" id="clearBtn">✕ Clear</button>
-                        </div>
-                        <div class="game-status" id="gameStatus">Drag instructions to program your bot. Click a step to remove it.</div>
-                    </div>
-                </div>
-                <div class="game-grid-wrapper">
-                    <div class="game-grid" id="gameGrid" style="grid-template-columns: repeat(6, 1fr);"></div>
-                    <div class="game-score">
-                        Level <span id="scoreLevel">1</span> &bull; Best: <strong id="bestScore">—</strong> &bull; Total: <strong id="totalStars">0</strong> ⭐
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Repeat count dialog -->
-<div class="repeat-dialog" id="repeatDialog">
-    <div class="repeat-dialog-inner glass">
-        <h4>🔁 How many times?</h4>
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;">Choose how many times to repeat the next commands</p>
-        <div>
-            <button class="btn btn-primary" data-rep="2">2×</button>
-            <button class="btn btn-primary" data-rep="3">3×</button>
-            <button class="btn btn-primary" data-rep="4">4×</button>
-            <button class="btn btn-outline" data-rep="5">5×</button>
-        </div>
-        <button style="margin-top:12px;" class="btn btn-outline" id="repCancel">Cancel</button>
-    </div>
-</div>
 
 <!-- SKILLS -->
 <section id="skills">
@@ -731,7 +573,7 @@
             <p>Whether you want to collaborate, invest, mentor, or just have a conversation about deep-tech in Africa — I'd love to hear from you.</p>
             <div class="contact-links">
                 <a href="mailto:ibrahim@umgafrica.com" class="contact-link">📧 Email</a>
-                <a href="#" target="_blank" class="contact-link">💻 GitHub</a>
+                <a href="https://github.com/abdullibrahim733-pixel" target="_blank" class="contact-link">💻 GitHub</a>
                 <a href="#" target="_blank" class="contact-link">🐦 X / Twitter</a>
                 <a href="#" target="_blank" class="contact-link">🔗 LinkedIn</a>
                 <a href="#" target="_blank" class="contact-link">▶ YouTube</a>
@@ -823,367 +665,7 @@ document.querySelectorAll('.reveal').forEach(el => {
 });
 
 // ================================================================
-// 4. GAME: Siafu Code Challenge
-// ================================================================
-const LEVELS = [
-    { title: "First Steps", desc: "Move forward to reach the target. One instruction is all you need.", grid: 6, bot: [0,2], target: [0,5], walls: [], solution: ["F","F","F"], stars: 1 },
-    { title: "Navigate the Corner", desc: "A right turn and some forward steps. Like routing a PCB trace around an obstacle.", grid: 6, bot: [0,0], target: [3,3], walls: [], solution: ["F","F","F","R","F","F","F"], stars: 2 },
-    { title: "The L-Path", desc: "Turn left and move. Simple, but one wrong turn and you'll hit a wall.", grid: 6, bot: [0,0], target: [3,3], walls: [[1,0],[2,2],[2,3],[2,4]], solution: ["F","F","F","L","F","F","F"], stars: 2 },
-    { title: "Zigzag", desc: "Multiple turns. Plan ahead — this is what real pathfinding looks like on a robot.", grid: 7, bot: [0,0], target: [6,6], walls: [[3,0],[3,1],[3,2],[3,3],[3,4],[3,5],[1,3],[2,3]], solution: ["F","F","F","R","F","F","F","L","F","F","F"], stars: 3 },
-    { title: "Loop Debut", desc: "Use a REPEAT block! When you see a pattern, loop it. This is why we write firmware.", grid: 6, bot: [0,0], target: [0,5], walls: [], solution: ["RE","F","F","F","F","F","RE"], stars: 2 },
-    { title: "The Spiral", desc: "A classic programming puzzle. Move in a spiral pattern to reach the center target.", grid: 7, bot: [2,2], target: [0,0], walls: [[1,1],[1,2],[1,3],[1,4],[2,4],[3,4],[3,3],[3,2],[3,1],[2,1]], solution: ["L","F","L","F","F","L","F","F","F","L","F","F","F","F"], stars: 3 },
-    { title: "Memory Challenge", desc: "Navigate without seeing the full path! Some cells are traps — you must deduce the safe route.", grid: 8, bot: [0,0], target: [7,7], walls: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[7,2],[6,2],[5,2],[4,2],[3,2],[2,2],[1,2],[0,2]], solution: ["F","F","F","F","F","F","F","R","F","F","F","F","F","F","F","L","F","F","F","F","F","F","F"], stars: 4 },
-    { title: "Siafu Finale", desc: "The ultimate test. Use everything you've learned — sequences, turns, and patterns. Real swarm logic.", grid: 8, bot: [0,0], target: [7,7], walls: [[3,0],[3,1],[3,2],[3,4],[3,5],[3,6],[1,3],[2,3],[4,3],[5,3],[6,3],[3,3]], solution: ["F","F","F","R","F","F","F","L","F","F","F"], stars: 5 }
-];
-
-let currentLevel = 0;
-let program = [];
-let isRunning = false;
-let canAcceptRepeat = false;
-
-// Load saved progress
-let savedLevel = 0;
-try { savedLevel = parseInt(localStorage.getItem('siafuLevel') || '0'); } catch(e) {}
-let bestScores = {};
-try { bestScores = JSON.parse(localStorage.getItem('siafuScores') || '{}'); } catch(e) {}
-
-function renderGrid() {
-    const lv = LEVELS[currentLevel];
-    const grid = document.getElementById('gameGrid');
-    const size = lv.grid;
-    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-    grid.innerHTML = '';
-
-    // Compute cell size based on grid dimension
-    const cellSize = size <= 6 ? 48 : (size <= 7 ? 40 : 32);
-    document.querySelectorAll('.game-cell').forEach(c => c.style.width = cellSize + 'px');
-    document.querySelectorAll('.game-cell').forEach(c => c.style.height = cellSize + 'px');
-
-    for (let r = 0; r < size; r++) {
-        for (let c = 0; c < size; c++) {
-            const cell = document.createElement('div');
-            cell.className = 'game-cell';
-            cell.dataset.r = r;
-            cell.dataset.c = c;
-            cell.style.width = cellSize + 'px';
-            cell.style.height = cellSize + 'px';
-
-            if (lv.walls.some(w => w[0] === r && w[1] === c)) {
-                cell.classList.add('obstacle');
-            } else if (lv.target[0] === r && lv.target[1] === c) {
-                cell.classList.add('target');
-                cell.innerHTML = '<span class="game-target">⚡</span>';
-            }
-            grid.appendChild(cell);
-        }
-    }
-
-    // Place bot
-    updateBotPosition(lv.bot[0], lv.bot[1]);
-}
-
-function updateBotPosition(r, c) {
-    // Clear previous bot
-    document.querySelectorAll('.game-bot').forEach(el => el.remove());
-    const cells = document.querySelectorAll('.game-cell');
-    const idx = r * LEVELS[currentLevel].grid + c;
-    if (cells[idx]) {
-        const bot = document.createElement('span');
-        bot.className = 'game-bot';
-        bot.textContent = '🐜';
-        cells[idx].appendChild(bot);
-        cells[idx].classList.add('bot');
-    }
-}
-
-function getCell(r, c) {
-    const size = LEVELS[currentLevel].grid;
-    return document.querySelectorAll('.game-cell')[r * size + c];
-}
-
-function updateUI() {
-    const lv = LEVELS[currentLevel];
-    document.getElementById('levelDisplay').textContent = currentLevel + 1;
-    document.getElementById('levelTitle').textContent = lv.title;
-    document.getElementById('levelDesc').textContent = lv.desc;
-    document.getElementById('scoreLevel').textContent = currentLevel + 1;
-    document.getElementById('gameLevelBadge').innerHTML = `🤖 Level <span>${currentLevel + 1}</span>/${LEVELS.length}`;
-
-    // Best score
-    const star = bestScores[currentLevel] || '-';
-    document.getElementById('bestScore').textContent = star === '-' ? '—' : '⭐'.repeat(star);
-
-    // Total stars
-    let total = 0;
-    for (let i = 0; i < currentLevel; i++) {
-        total += bestScores[i] || 0;
-    }
-    document.getElementById('totalStars').textContent = total;
-
-    // Update program list
-    renderProgram();
-}
-
-function renderProgram() {
-    const list = document.getElementById('programList');
-    if (program.length === 0) {
-        list.innerHTML = '<span style="font-size:0.7rem;color:var(--text-muted);width:100%;text-align:center;">Click instructions above to build your program</span>';
-        return;
-    }
-    list.innerHTML = '';
-    program.forEach((cmd, i) => {
-        const step = document.createElement('span');
-        step.className = 'program-step' + (cmd.type === 'RE' ? ' loop-start' : '');
-        step.innerHTML = `<span>${cmd.label}</span><span class="rm">✕</span>`;
-        step.title = 'Click to remove';
-        step.addEventListener('click', () => {
-            program.splice(i, 1);
-            renderProgram();
-        });
-        list.appendChild(step);
-    });
-}
-
-// Add command to program
-document.querySelectorAll('.cmd-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (isRunning) return;
-        const cmd = btn.dataset.cmd;
-        if (cmd === 'RE') {
-            canAcceptRepeat = true;
-            document.getElementById('repeatDialog').classList.add('open');
-            return;
-        }
-        const map = { 'F': { type: 'F', label: '⬆️ F' }, 'L': { type: 'L', label: '↰ L' }, 'R': { type: 'R', label: '↱ R' } };
-        if (map[cmd]) {
-            program.push(map[cmd]);
-            renderProgram();
-        }
-    });
-});
-
-// Repeat dialog
-document.querySelectorAll('[data-rep]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const n = parseInt(btn.dataset.rep);
-        program.push({ type: 'RE', label: `🔁×${n}`, count: n });
-        document.getElementById('repeatDialog').classList.remove('open');
-        // Add a matching end marker (invisible, used during execution)
-        program.push({ type: 'RE_END', label: `🔁 End`, count: n });
-        renderProgram();
-        canAcceptRepeat = false;
-    });
-});
-document.getElementById('repCancel').addEventListener('click', () => {
-    document.getElementById('repeatDialog').classList.remove('open');
-    canAcceptRepeat = false;
-});
-
-// Clear
-document.getElementById('clearBtn').addEventListener('click', () => {
-    if (isRunning) return;
-    program = [];
-    renderProgram();
-    document.getElementById('gameStatus').textContent = 'Program cleared. Build a new sequence!';
-    document.getElementById('gameStatus').className = 'game-status';
-});
-
-// Reset level
-document.getElementById('resetBtn').addEventListener('click', () => {
-    if (isRunning) return;
-    renderGrid();
-    updateUI();
-    document.getElementById('gameStatus').textContent = 'Level reset. Try again!';
-    document.getElementById('gameStatus').className = 'game-status';
-});
-
-// Run
-document.getElementById('runBtn').addEventListener('click', runProgram);
-
-function runProgram() {
-    if (isRunning) return;
-    if (program.length === 0) {
-        document.getElementById('gameStatus').textContent = '⚠️ Your program is empty! Add some instructions.';
-        document.getElementById('gameStatus').className = 'game-status';
-        return;
-    }
-
-    isRunning = true;
-    document.getElementById('runBtn').disabled = true;
-    document.getElementById('gameStatus').textContent = '⚙️ Executing firmware...';
-    document.getElementById('gameStatus').className = 'game-status';
-
-    renderGrid();
-    const lv = LEVELS[currentLevel];
-    let r = lv.bot[0], c = lv.bot[1];
-    let dir = 0; // 0=up, 1=right, 2=down, 3=left
-    const size = lv.grid;
-
-    // Flatten program (expand loops)
-    const steps = [];
-    let i = 0;
-    while (i < program.length) {
-        if (program[i].type === 'RE') {
-            const count = program[i].count;
-            // Collect commands until RE_END
-            i++;
-            const inner = [];
-            while (i < program.length && program[i].type !== 'RE_END') {
-                inner.push(program[i]);
-                i++;
-            }
-            // Skip RE_END
-            i++;
-            // Add inner commands count times
-            for (let n = 0; n < count; n++) {
-                steps.push(...inner.map(cmd => cmd.type));
-            }
-        } else {
-            steps.push(program[i].type);
-            i++;
-        }
-    }
-
-    // Execute step by step
-    let stepIdx = 0;
-    let success = false;
-
-    function executeStep() {
-        if (stepIdx >= steps.length) {
-            // Done executing
-            finishRun(r, c);
-            return;
-        }
-
-        const cmd = steps[stepIdx];
-        stepIdx++;
-
-        // Clear path highlights
-        document.querySelectorAll('.game-cell.path').forEach(el => el.classList.remove('path'));
-        document.querySelectorAll('.game-cell.bot').forEach(el => el.classList.remove('bot'));
-
-        // Update position
-        const prevR = r, prevC = c;
-        if (cmd === 'F') {
-            if (dir === 0) r--;
-            else if (dir === 1) c++;
-            else if (dir === 2) r++;
-            else if (dir === 3) c--;
-        } else if (cmd === 'L') {
-            dir = (dir + 3) % 4;
-        } else if (cmd === 'R') {
-            dir = (dir + 1) % 4;
-        }
-
-        // Check boundaries and obstacles
-        if (r < 0 || r >= size || c < 0 || c >= size) {
-            // Hit wall
-            r = prevR;
-            c = prevC;
-            document.getElementById('gameStatus').textContent = '💥 OUT OF BOUNDS! Your bot hit the edge.';
-            document.getElementById('gameStatus').className = 'game-status lose';
-            endRun(false);
-            return;
-        }
-        if (lv.walls.some(w => w[0] === r && w[1] === c)) {
-            // Hit obstacle
-            r = prevR;
-            c = prevC;
-            document.getElementById('gameStatus').textContent = '🔥 CRASH! Your bot hit an obstacle. Debug and retry.';
-            document.getElementById('gameStatus').className = 'game-status lose';
-            endRun(false);
-            return;
-        }
-
-        // Highlight path
-        if (prevR !== r || prevC !== c) {
-            const prevCell = getCell(prevR, prevC);
-            if (prevCell) prevCell.classList.add('path');
-        }
-
-        // Update bot position
-        updateBotPosition(r, c);
-
-        // Rotate bot emoji based on direction
-        const botEl = document.querySelector('.game-bot');
-        if (botEl) {
-            botEl.style.transform = `rotate(${dir * 90}deg)`;
-            botEl.style.display = 'inline-block';
-        }
-
-        // Check win
-        if (r === lv.target[0] && c === lv.target[1]) {
-            finishRun(r, c, true);
-            return;
-        }
-
-        // Next step with delay
-        setTimeout(executeStep, 300);
-    }
-
-    function finishRun(rr, cc, won) {
-        if (won) {
-            document.getElementById('gameStatus').textContent = '🎉 SUCCESS! Your bot reached the target!';
-            document.getElementById('gameStatus').className = 'game-status win';
-            endRun(true);
-        } else {
-            if (rr === lv.target[0] && cc === lv.target[1]) {
-                document.getElementById('gameStatus').textContent = '🎉 SUCCESS!';
-                document.getElementById('gameStatus').className = 'game-status win';
-                endRun(true);
-            } else {
-                document.getElementById('gameStatus').textContent = '📡 Bot stopped. The target is still ahead. Try again!';
-                document.getElementById('gameStatus').className = 'game-status';
-                endRun(false);
-            }
-        }
-    }
-
-    function endRun(won) {
-        isRunning = false;
-        document.getElementById('runBtn').disabled = false;
-        if (won) {
-            // Calculate stars based on efficiency
-            const solutionLen = lv.solution.length;
-            const usedLen = steps.length;
-            let stars = 1;
-            if (usedLen <= solutionLen + 2) stars = lv.stars;
-            else if (usedLen <= solutionLen * 1.5) stars = Math.max(1, lv.stars - 1);
-            else stars = Math.max(1, lv.stars - 2);
-
-            // Update best score
-            const prev = bestScores[currentLevel] || 0;
-            if (stars > prev) {
-                bestScores[currentLevel] = stars;
-                try { localStorage.setItem('siafuScores', JSON.stringify(bestScores)); } catch(e) {}
-            }
-
-            // Save progress (unlock next level)
-            if (currentLevel < LEVELS.length - 1) {
-                try { localStorage.setItem('siafuLevel', String(currentLevel + 1)); } catch(e) {}
-            }
-
-            updateUI();
-            document.getElementById('gameStatus').textContent += ` ⭐ Rating: ${'⭐'.repeat(stars)}`;
-        }
-    }
-
-    // Start with a small delay
-    setTimeout(executeStep, 200);
-}
-
-// Init game
-function initGame() {
-    const startLevel = Math.min(savedLevel, LEVELS.length - 1);
-    currentLevel = startLevel;
-    renderGrid();
-    updateUI();
-}
-
-initGame();
-
-// ================================================================
-// 5. CHATBOT
+// 4. CHATBOT
 // ================================================================
 const chatData = {
     greetings: [/hello/i, /hi/i, /hey/i, /greetings/i, /morning/i, /evening/i, /good (day|afternoon)/i],
@@ -1215,10 +697,6 @@ const chatData = {
         keywords: [/contact/i, /email/i, /reach/i, /message/i, /get in touch/i, /hire/i, /collaborate/i, /work with/i],
         response: "You can reach Ibrahim at **ibrahim@umgafrica.com** or connect via the social links in the #contact section. He's open to collaborations, grants, mentorship, and investment conversations. 🤝"
     },
-    game: {
-        keywords: [/game/i, /siafu code/i, /challenge/i, /play/i, /puzzle/i],
-        response: "Try the **Siafu Code Challenge** 🐜 in the #game section! It's a visual programming puzzle where you guide a robot using embedded-style commands. 8 levels that teach real robotics logic — sequences, loops, and debugging. Your progress is saved in your browser. Can you beat all 8 levels? ⭐"
-    },
     education: {
         keywords: [/education/i, /student/i, /study/i, /school/i, /university/i, /mechatronics/i, /degree/i],
         response: "Ibrahim is a mechatronics engineering student in Tanzania. He's 19 years old and started building companies while studying — applying what he learns in the classroom directly to real hardware and software projects."
@@ -1233,7 +711,7 @@ const chatData = {
     },
     help: {
         keywords: [/help/i, /what can you/i, /capabilities/i, /commands/i, /options/i],
-        response: "I can tell you about:\n👤 **Ibrahim** — his background, mission, story\n🏢 **UMG Africa** — the holding company and all 5 subsidiaries\n🐜 **Siafu Code Challenge** — the embedded systems game\n🔧 **Projects & Skills** — what he's building and what he knows\n📬 **Contact** — how to reach him\n\nJust ask me anything! 😊"
+        response: "I can tell you about:\n👤 **Ibrahim** — his background, mission, story\n🏢 **UMG Africa** — the holding company and all 5 subsidiaries\n🔧 **Projects & Skills** — what he's building and what he knows\n📬 **Contact** — how to reach him\n\nJust ask me anything! 😊"
     }
 };
 
@@ -1265,8 +743,8 @@ function getBotResponse(input) {
     // Default responses
     const defaults = [
         "That's an interesting question! I'm not sure I have the answer yet. Try asking about Ibrahim's **projects**, **skills**, or **UMG Africa** ventures. Or type 'help' to see what I can do! 😊",
-        "Great question! I don't have that info stored, but I can tell you about Ibrahim's **background**, his **companies** (Olive AI, Siafu Robotics, Ghost, Jenga Connect, Hydrolith), or the **Siafu Code Challenge** game. What interests you? 🤔",
-        "I'd love to help with that! Try asking about **Ibrahim's story**, his **projects**, or check out the **game** section. You can also type 'help' for a full list of topics. 🌟"
+        "Great question! I don't have that info stored, but I can tell you about Ibrahim's **background**, his **companies** (Olive AI, Siafu Robotics, Ghost, Jenga Connect, Hydrolith), or his **skills**. What interests you? 🤔",
+        "I'd love to help with that! Try asking about **Ibrahim's story**, his **projects**, or check out the **ventures** section. You can also type 'help' for a full list of topics. 🌟"
     ];
     return defaults[Math.floor(Math.random() * defaults.length)];
 }
@@ -1309,13 +787,11 @@ function updateSuggestions(lastInput) {
     if (lower.includes('project') || lower.includes('build')) {
         suggestions = ['Tell me about Siafu', 'What is Olive AI?', 'Tell me about Ghost'];
     } else if (lower.includes('siafu') || lower.includes('robot')) {
-        suggestions = ['Try the Siafu Game', 'What are swarm robots?', 'Skills used in robotics'];
-    } else if (lower.includes('game') || lower.includes('play')) {
-        suggestions = ['How to play?', 'What are the levels?', 'Tell me about the creator'];
+        suggestions = ['What are swarm robots?', 'Skills used in robotics', 'Tell me about Siafu'];
     } else if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey')) {
         suggestions = ['Who is Ibrahim?', 'What does UMG Africa do?', 'Show me projects'];
     } else {
-        suggestions = ['Who is Ibrahim?', 'What projects?', 'Try the game!', 'Contact info'];
+        suggestions = ['Who is Ibrahim?', 'What projects?', 'Contact info', 'What is UMG Africa?'];
     }
 
     container.innerHTML = suggestions.map(s =>
@@ -1338,7 +814,7 @@ document.getElementById('chatInput').addEventListener('keydown', (e) => {
 
 // Add initial greeting
 setTimeout(() => {
-    addChatMessage("👋 Hi! I'm Ibrahim's virtual assistant. Ask me about his background, projects, the Siafu Code Challenge game, or anything UMG Africa-related!", 'bot');
+    addChatMessage("👋 Hi! I'm Ibrahim's virtual assistant. Ask me about his background, projects, or anything UMG Africa-related!", 'bot');
     updateSuggestions('hello');
 }, 500);
 
