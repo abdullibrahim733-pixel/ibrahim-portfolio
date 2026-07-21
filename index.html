@@ -325,16 +325,38 @@
         }
         .int-card h4 { font-size: 0.85rem; font-weight: 600; }
         .int-card p { font-size: 0.7rem; color: var(--text-muted); opacity: 0.7; }
-        .int-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-        .int-tags span {
-            font-size: 0.65rem; padding: 3px 8px; border-radius: 100px;
-            background: var(--surface0); color: var(--subtext0);
-        }
         .int-card.ai-cloud .int-card-icon { background: color-mix(in srgb, var(--mauve) 20%, transparent); }
+        .int-card.agentic .int-card-icon { background: color-mix(in srgb, var(--pink) 20%, transparent); }
         .int-card.pcb-cad .int-card-icon { background: color-mix(in srgb, var(--blue) 20%, transparent); }
         .int-card.programming .int-card-icon { background: color-mix(in srgb, var(--green) 20%, transparent); }
         .int-card.hardware .int-card-icon { background: color-mix(in srgb, var(--peach) 20%, transparent); }
         .int-card.creative .int-card-icon { background: color-mix(in srgb, var(--pink) 20%, transparent); }
+
+        /* TOOL LOGO CHIPS */
+        .tool-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .tool-chip {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 6px 12px; border-radius: 8px;
+            background: var(--surface0); border: 1px solid var(--glass-border);
+            transition: all 0.2s; cursor: default;
+        }
+        .tool-chip:hover {
+            transform: translateY(-2px);
+            border-color: color-mix(in srgb, var(--mauve) 30%, transparent);
+            background: color-mix(in srgb, var(--mauve) 8%, var(--surface0));
+        }
+        .tool-chip img.tool-logo {
+            width: 18px; height: 18px;
+            object-fit: contain; display: block;
+            flex-shrink: 0;
+        }
+        .tool-logo-fallback {
+            width: 18px; height: 18px; border-radius: 4px;
+            display: none; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 700; color: #fff;
+            flex-shrink: 0;
+        }
+        .tool-chip-name { font-size: 0.75rem; font-weight: 500; white-space: nowrap; }
 
         /* YOUTUBE */
         .youtube-showcase { margin-top: 48px; }
@@ -710,67 +732,97 @@
         <p class="section-subtitle reveal">The ecosystem I work with — from AI platforms to PCB design suites.</p>
         <div class="integrations-grid">
 
-            <!-- AI & Cloud -->
+            <!-- AI &amp; Cloud Platforms -->
             <div class="int-card ai-cloud reveal">
                 <div class="int-card-header">
                     <div class="int-card-icon">☁️</div>
                     <div><h4>AI &amp; Cloud Platforms</h4><p>Backend intelligence &amp; infrastructure</p></div>
                 </div>
-                <div class="int-tags">
-                    <span>OpenAI</span><span>Anthropic</span><span>Supabase</span><span>n8n</span>
-                    <span>Zapier</span><span>Railway</span><span>Vercel</span><span>Twilio</span>
-                    <span>Together AI</span><span>Ollama</span>
+                <div class="tool-grid">
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/openai/fff" alt="OpenAI" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#10a37f">O</span><span class="tool-chip-name">OpenAI</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/anthropic/fff" alt="Anthropic" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#d97757">A</span><span class="tool-chip-name">Anthropic</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/supabase/fff" alt="Supabase" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#3ecf8e">S</span><span class="tool-chip-name">Supabase</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/n8n/fff" alt="n8n" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#ea4a62">n</span><span class="tool-chip-name">n8n</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/zapier/fff" alt="Zapier" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#ff4a00">Z</span><span class="tool-chip-name">Zapier</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/railway/fff" alt="Railway" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#0b0d0e">R</span><span class="tool-chip-name">Railway</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/vercel/fff" alt="Vercel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#000000">V</span><span class="tool-chip-name">Vercel</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/twilio/fff" alt="Twilio" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#f22f46">T</span><span class="tool-chip-name">Twilio</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/together/fff" alt="Together AI" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#364153">T</span><span class="tool-chip-name">Together AI</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/ollama/fff" alt="Ollama" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#000000">O</span><span class="tool-chip-name">Ollama</span></span>
                 </div>
             </div>
 
-            <!-- PCB & CAD -->
+            <!-- PCB Design &amp; CAD -->
             <div class="int-card pcb-cad reveal">
                 <div class="int-card-header">
                     <div class="int-card-icon">🔬</div>
                     <div><h4>PCB Design &amp; CAD</h4><p>From schematic to fabrication</p></div>
                 </div>
-                <div class="int-tags">
-                    <span>EasyEDA</span><span>Altium Designer</span><span>Flux</span><span>KiCad</span>
-                    <span>Fusion 360</span><span>OpenSCAD</span><span>FreeCAD</span>
+                <div class="tool-grid">
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/easyeda/fff" alt="EasyEDA" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#1765f6">E</span><span class="tool-chip-name">EasyEDA</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/altiumdesigner/fff" alt="Altium Designer" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#a5915a">A</span><span class="tool-chip-name">Altium Designer</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/flux/fff" alt="Flux" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#21b0fe">F</span><span class="tool-chip-name">Flux</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/kicad/fff" alt="KiCad" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#2b6cb0">K</span><span class="tool-chip-name">KiCad</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/autodesk/fff" alt="Fusion 360" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#e4122c">F</span><span class="tool-chip-name">Fusion 360</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/openscad/fff" alt="OpenSCAD" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#5c7c8c">O</span><span class="tool-chip-name">OpenSCAD</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/freecad/fff" alt="FreeCAD" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#cb3837">F</span><span class="tool-chip-name">FreeCAD</span></span>
                 </div>
             </div>
 
-            <!-- Programming Languages -->
+            <!-- Languages &amp; Frameworks -->
             <div class="int-card programming reveal">
                 <div class="int-card-header">
                     <div class="int-card-icon">⌨️</div>
                     <div><h4>Languages &amp; Frameworks</h4><p>Code that ships</p></div>
                 </div>
-                <div class="int-tags">
-                    <span>Python</span><span>Rust</span><span>JavaScript</span><span>TypeScript</span>
-                    <span>C / C++</span><span>Flask</span><span>React</span><span>Node.js</span>
-                    <span>MicroPython</span><span>Bash</span>
+                <div class="tool-grid">
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/python/fff" alt="Python" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#3776ab">P</span><span class="tool-chip-name">Python</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/rust/fff" alt="Rust" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#000000">R</span><span class="tool-chip-name">Rust</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/javascript/fff" alt="JavaScript" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#f7df1e">J</span><span class="tool-chip-name">JavaScript</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/typescript/fff" alt="TypeScript" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#3178c6">T</span><span class="tool-chip-name">TypeScript</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/cplusplus/fff" alt="C/C++" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#00599c">C</span><span class="tool-chip-name">C/C++</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/flask/fff" alt="Flask" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#000000">F</span><span class="tool-chip-name">Flask</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/react/fff" alt="React" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#61dafb">R</span><span class="tool-chip-name">React</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/nodedotjs/fff" alt="Node.js" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#339933">N</span><span class="tool-chip-name">Node.js</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/micropython/fff" alt="MicroPython" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#2b2b2b">M</span><span class="tool-chip-name">MicroPython</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/gnubash/fff" alt="Bash" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#4eaa25">B</span><span class="tool-chip-name">Bash</span></span>
                 </div>
             </div>
 
-            <!-- Hardware & Embedded -->
+            <!-- Hardware &amp; Embedded -->
             <div class="int-card hardware reveal">
                 <div class="int-card-header">
                     <div class="int-card-icon">🔌</div>
                     <div><h4>Hardware &amp; Embedded</h4><p>Bringing code to life</p></div>
                 </div>
-                <div class="int-tags">
-                    <span>Arduino</span><span>ESP32</span><span>Raspberry Pi</span><span>STM32</span>
-                    <span>Webots</span><span>Gazebo</span><span>Sensors</span><span>Actuators</span>
-                    <span>3D Printing</span><span>CNC</span>
+                <div class="tool-grid">
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/arduino/fff" alt="Arduino" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#00878f">A</span><span class="tool-chip-name">Arduino</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/espressif/fff" alt="ESP32" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#e7352c">E</span><span class="tool-chip-name">ESP32</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/raspberrypi/fff" alt="Raspberry Pi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#a22846">R</span><span class="tool-chip-name">Raspberry Pi</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/stmicroelectronics/fff" alt="STM32" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#03234b">S</span><span class="tool-chip-name">STM32</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/webots/fff" alt="Webots" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#00a1e4">W</span><span class="tool-chip-name">Webots</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/gazebo/fff" alt="Gazebo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#ff6600">G</span><span class="tool-chip-name">Gazebo</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/threedotjs/fff" alt="3D Printing" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#555555">3</span><span class="tool-chip-name">3D Printing</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/cnc/fff" alt="CNC" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#444444">C</span><span class="tool-chip-name">CNC</span></span>
                 </div>
             </div>
 
-            <!-- Agentic & Automation -->
-            <div class="int-card creative reveal">
+            <!-- Agentic &amp; Automation -->
+            <div class="int-card agentic reveal">
                 <div class="int-card-header">
                     <div class="int-card-icon">🧩</div>
                     <div><h4>Agentic &amp; Automation</h4><p>AI-driven workflows</p></div>
                 </div>
-                <div class="int-tags">
-                    <span>LangChain</span><span>CrewAI</span><span>AutoGen</span><span>Hermes Agent</span>
-                    <span>Claude Code</span><span>OpenAI Agents</span><span>Composio</span>
-                    <span>Dify</span><span>Botpress</span>
+                <div class="tool-grid">
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/langchain/fff" alt="LangChain" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#1c3c3c">L</span><span class="tool-chip-name">LangChain</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/crewai/fff" alt="CrewAI" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#ff5a00">C</span><span class="tool-chip-name">CrewAI</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/autogen/fff" alt="AutoGen" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#0095d5">A</span><span class="tool-chip-name">AutoGen</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/hermes/fff" alt="Hermes Agent" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#6c47ff">H</span><span class="tool-chip-name">Hermes Agent</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/anthropic/fff" alt="Claude Code" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#d97757">C</span><span class="tool-chip-name">Claude Code</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/openai/fff" alt="OpenAI Agents" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#10a37f">O</span><span class="tool-chip-name">OpenAI Agents</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/dify/fff" alt="Dify" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#1c64f2">D</span><span class="tool-chip-name">Dify</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/botpress/fff" alt="Botpress" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#4285f4">B</span><span class="tool-chip-name">Botpress</span></span>
+                    <span class="tool-chip"><img class="tool-logo" src="https://cdn.simpleicons.org/composio/fff" alt="Composio" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="tool-logo-fallback" style="background:#7c3aed">C</span><span class="tool-chip-name">Composio</span></span>
                 </div>
             </div>
 
