@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ibrahim — Founder &amp; Engineer | UMG Africa</title>
     <meta name="description" content="Ibrahim, 19-year-old Tanzanian founder building deep-tech for Africa's future — swarm robotics, AI, programming languages, and space technology." />
     <meta name="keywords" content="Ibrahim, UMG Africa, Tanzania, founder, engineer, AI, robotics, mechatronics" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;polygon points='60,10 20,55 50,55 40,90 80,45 50,45' fill='%23a6e3a1'/&gt;&lt;/svg&gt;" />
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,9 +20,9 @@
         img { max-width: 100%; display: block; }
 
         /* ================================================================
-           CATPPUCCIN THEME — Dark (Mocha) default, Light (Latte) via attr
+           CATPPUCCIN DARK THEME — Mocha
            ================================================================ */
-        :root, [data-theme="dark"] {
+        :root {
             --base: #1e1e2e;
             --mantle: #181825;
             --crust: #11111b;
@@ -62,43 +62,7 @@
             --orb-3-bg: rgba(148,226,213,0.05);
         }
 
-        [data-theme="light"] {
-            --base: #eff1f5;
-            --mantle: #e6e9ef;
-            --crust: #dce0e8;
-            --surface0: #ccd0da;
-            --surface1: #bcc0cc;
-            --surface2: #acb0be;
-            --overlay0: #9ca0b0;
-            --overlay1: #8c8fa1;
-            --text: #4c4f69;
-            --text-muted: #6c6f85;
-            --lavender: #7287fd;
-            --blue: #1e66f5;
-            --sapphire: #209fb5;
-            --sky: #04a5e5;
-            --teal: #179299;
-            --green: #40a02b;
-            --yellow: #df8e1d;
-            --peach: #fe640b;
-            --maroon: #e64553;
-            --red: #d20f39;
-            --mauve: #8839ef;
-            --pink: #ea76cb;
-            --rosewater: #dc8a78;
-            --flamingo: #dd7878;
-            --glass: rgba(0,0,0,0.04);
-            --glass-border: rgba(0,0,0,0.08);
-            --card-bg: rgba(0,0,0,0.02);
-            --nav-bg: rgba(239,241,245,0.85);
-            --nav-scrolled: rgba(239,241,245,0.95);
-            --bg-page: #dce0e8;
-            --chat-bg: #eff1f5;
-            --btn-text: #eff1f5;
-            --orb-1-bg: rgba(64,160,43,0.08);
-            --orb-2-bg: rgba(254,100,11,0.06);
-            --orb-3-bg: rgba(23,146,153,0.06);
-        }
+
 
         body {
             background: var(--bg-page);
@@ -134,25 +98,6 @@
         .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
         section { padding: 100px 0; }
         .glass { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--radius); }
-
-        /* THEME TOGGLE */
-        .theme-toggle {
-            background: var(--surface0);
-            border: 1px solid var(--glass-border);
-            color: var(--text);
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        .theme-toggle:hover {
-            background: var(--surface1);
-            transform: rotate(15deg);
-        }
 
         /* NAV */
         nav {
@@ -520,7 +465,7 @@
             <a href="#contact" class="nav-cta">Connect</a>
         </div>
         <div style="display:flex;gap:12px;align-items:center;">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+
             <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
             </div>
@@ -605,10 +550,10 @@
                 <p>My mission: <strong>build a globally influential AI, robotics, and engineering company that originates from Africa</strong>. I believe the next wave of technological revolution won't come from Silicon Valley alone — it will come from those who face the hardest problems and choose to solve them.</p>
             </div>
             <div class="about-visual reveal">
-                <div class="about-stat-card"><div class="icon">🧠</div><h4><span>AI</span></h4><p>Automation &amp; agents</p></div>
-                <div class="about-stat-card"><div class="icon">🤖</div><h4><span>Robotics</span></h4><p>Swarm intelligence</p></div>
-                <div class="about-stat-card"><div class="icon">⌨️</div><h4><span>Languages</span></h4><p>Compiler design</p></div>
-                <div class="about-stat-card"><div class="icon">🛰️</div><h4><span>Space</span></h4><p>Hydrolith systems</p></div>
+                <div class="about-stat-card"><div class="icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 2-1.5 3-3 4-1.5 1-2 2.5-2 4a3 3 0 0 0 3 3"/><path d="M9 17a4 4 0 0 0-3-3.9M17 17a4 4 0 0 1 3-3.9"/><path d="M12 17v4"/><path d="M9 21h6"/><path d="M8 11a4 4 0 1 1 8 0"/></svg></div><h4><span>AI</span></h4><p>Automation &amp; agents</p></div>
+                <div class="about-stat-card"><div class="icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg></div><h4><span>Robotics</span></h4><p>Swarm intelligence</p></div>
+                <div class="about-stat-card"><div class="icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h4><span>Languages</span></h4><p>Compiler design</p></div>
+                <div class="about-stat-card"><div class="icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M2 9h20v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9Z"/><path d="M12 13v4"/><path d="M7 13h10"/></svg></div><h4><span>Space</span></h4><p>Hydrolith systems</p></div>
             </div>
         </div>
     </div>
@@ -621,13 +566,13 @@
         <h2 class="section-title reveal">UMG Africa Holding Company</h2>
         <p class="section-subtitle reveal">Software cash funds hardware R&amp;D. Hardware breakthroughs enable space technology. Each company feeds the next.</p>
         <div class="flywheel reveal">
-            <div class="flywheel-center"><h3>⚡ UMG Africa</h3><p>Version Extreme Cooperation — Engineering Africa's Future</p></div>
+            <div class="flywheel-center"><h3><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> UMG Africa</h3><p>Version Extreme Cooperation — Engineering Africa's Future</p></div>
             <div class="flywheel-grid">
-                <div class="flywheel-card"><span class="emoji">🌿</span><h4>Olive AI</h4><p>AI-powered WhatsApp agents for African businesses.</p><span class="tag">Cash Flow</span></div>
-                <div class="flywheel-card"><span class="emoji">🔗</span><h4>Jenga Connect</h4><p>Construction marketplace connecting fundis to customers.</p><span class="tag">Cash Flow</span></div>
-                <div class="flywheel-card"><span class="emoji">🐜</span><h4>Siafu Robotics</h4><p>Swarm robotics — collective intelligence from simple agents.</p><span class="tag">Hardware R&amp;D</span></div>
-                <div class="flywheel-card"><span class="emoji">👻</span><h4>Ghost</h4><p>A domain-specific systems programming language from scratch.</p><span class="tag">Infrastructure</span></div>
-                <div class="flywheel-card"><span class="emoji">💧</span><h4>Hydrolith</h4><p>Space technology — long-term exploration infrastructure.</p><span class="tag">Frontier</span></div>
+                <div class="flywheel-card"><span class="emoji"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 5.4 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span><h4>Olive AI</h4><p>AI-powered WhatsApp agents for African businesses.</p><span class="tag">Cash Flow</span></div>
+                <div class="flywheel-card"><span class="emoji"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><h4>Jenga Connect</h4><p>Construction marketplace connecting fundis to customers.</p><span class="tag">Cash Flow</span></div>
+                <div class="flywheel-card"><span class="emoji"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2"/><path d="M5 10c-.7 1.9 0 4 1 5.5"/><path d="M19 10c.7 1.9 0 4-1 5.5"/><path d="M12 8v8"/><path d="M8 16c-.5 1.5-1.5 3-1 5 0 1 2 .5 3-1 .5-1 1-3 2-4"/><path d="M16 16c.5 1.5 1.5 3 1 5 0 1-2 .5-3-1-.5-1-1-3-2-4"/><path d="M7 18c-1.5 1-3 2-4 3 0 1 2 1 4-.5"/><path d="M17 18c1.5 1 3 2 4 3 0 1-2 1-4-.5"/></svg></span><h4>Siafu Robotics</h4><p>Swarm robotics — collective intelligence from simple agents.</p><span class="tag">Hardware R&amp;D</span></div>
+                <div class="flywheel-card"><span class="emoji"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 10h.01"/><path d="M15 10h.01"/><path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"/></svg></span><h4>Ghost</h4><p>A domain-specific systems programming language from scratch.</p><span class="tag">Infrastructure</span></div>
+                <div class="flywheel-card"><span class="emoji"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span><h4>Hydrolith</h4><p>Space technology — long-term exploration infrastructure.</p><span class="tag">Frontier</span></div>
             </div>
         </div>
     </div>
@@ -640,7 +585,7 @@
         <h2 class="section-title reveal">Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card reveal">
-                <div class="project-visual"><div class="glow" style="background:var(--green);"></div>🐜</div>
+                <div class="project-visual"><div class="glow" style="background:var(--green);"></div><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2"/><path d="M5 10c-.7 1.9 0 4 1 5.5"/><path d="M19 10c.7 1.9 0 4-1 5.5"/><path d="M12 8v8"/><path d="M8 16c-.5 1.5-1.5 3-1 5 0 1 2 .5 3-1 .5-1 1-3 2-4"/><path d="M16 16c.5 1.5 1.5 3 1 5 0 1-2 .5-3-1-.5-1-1-3-2-4"/><path d="M7 18c-1.5 1-3 2-4 3 0 1 2 1 4-.5"/><path d="M17 18c1.5 1 3 2 4 3 0 1-2 1-4-.5"/></svg></div>
                 <div class="project-info">
                     <h3>Siafu Swarm Robotics</h3>
                     <p>Bio-inspired swarm robots modelled on Siafu (Dorylus) ants. Each agent is simple — collective intelligence emerges from the swarm. Custom PCB design, OpenSCAD chassis, Webots simulation, and real hardware.</p>
@@ -649,7 +594,7 @@
                 </div>
             </div>
             <div class="project-card reverse reveal">
-                <div class="project-visual"><div class="glow" style="background:var(--peach);"></div>👻</div>
+                <div class="project-visual"><div class="glow" style="background:var(--peach);"></div><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 10h.01"/><path d="M15 10h.01"/><path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"/></svg></div>
                 <div class="project-info">
                     <h3>Ghost Programming Language</h3>
                     <p>A domain-specific systems language built from scratch. Alpha compiler in Rust with recursive descent parsing, bytecode VM, and a growing standard library. Designed for robotics and embedded systems.</p>
@@ -658,7 +603,7 @@
                 </div>
             </div>
             <div class="project-card reveal">
-                <div class="project-visual"><div class="glow" style="background:var(--green);"></div>🌿</div>
+                <div class="project-visual"><div class="glow" style="background:var(--green);"></div><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 5.4 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
                 <div class="project-info">
                     <h3>Olive AI</h3>
                     <p>AI-powered WhatsApp agent platform for African businesses. Automates customer service, lead qualification, and order management through natural conversation. Multi-tenant SaaS built with Flask, Twilio, and OpenAI.</p>
@@ -667,7 +612,7 @@
                 </div>
             </div>
             <div class="project-card reverse reveal">
-                <div class="project-visual"><div class="glow" style="background:var(--peach);"></div>🔗</div>
+                <div class="project-visual"><div class="glow" style="background:var(--peach);"></div><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
                 <div class="project-info">
                     <h3>Jenga Connect</h3>
                     <p>A construction marketplace connecting skilled fundis (masons, electricians, plumbers) with customers who need work done. Bringing trust and transparency to Tanzania's informal construction sector.</p>
@@ -688,35 +633,35 @@
         <div class="skills-section">
             <div class="skills-progress-grid">
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">⚙️ Embedded Systems</span><span class="skill-pct">90%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Embedded Systems</span><span class="skill-pct">90%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:90%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">🤖 AI Agentic Automations</span><span class="skill-pct">88%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg> AI Agentic Automations</span><span class="skill-pct">88%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:88%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">🧠 Artificial Intelligence / LLMs</span><span class="skill-pct">85%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><path d="M12 2a4 4 0 0 1 4 4c0 2-1.5 3-3 4-1.5 1-2 2.5-2 4a3 3 0 0 0 3 3"/><path d="M9 17a4 4 0 0 0-3-3.9M17 17a4 4 0 0 1 3-3.9"/><path d="M12 17v4"/><path d="M9 21h6"/><path d="M8 11a4 4 0 1 1 8 0"/></svg> Artificial Intelligence / LLMs</span><span class="skill-pct">85%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:85%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">📱 Mobile App Development</span><span class="skill-pct">72%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Mobile App Development</span><span class="skill-pct">72%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:72%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">🌐 IoT (Internet of Things)</span><span class="skill-pct">82%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> IoT (Internet of Things)</span><span class="skill-pct">82%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:82%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">🔧 Mechatronics Engineering</span><span class="skill-pct">85%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Mechatronics Engineering</span><span class="skill-pct">85%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:85%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">💻 Full-Stack Development</span><span class="skill-pct">78%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Full-Stack Development</span><span class="skill-pct">78%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:78%"></div></div>
                 </div>
                 <div class="skill-progress-item reveal">
-                    <div class="skill-progress-header"><span class="skill-name">📐 PCB Design &amp; CAD</span><span class="skill-pct">80%</span></div>
+                    <div class="skill-progress-header"><span class="skill-name"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg> PCB Design &amp; CAD</span><span class="skill-pct">80%</span></div>
                     <div class="skill-progress-track"><div class="skill-progress-fill" style="width:80%"></div></div>
                 </div>
             </div>
@@ -841,9 +786,9 @@
                 <div class="yt-text">
                     <h3>SwarmMind YouTube</h3>
                     <p>Educational tech content with Hormozi-style captions. I show the real process — PCB assembly, compiler bugs, robot tests. No fluff, no fake perfection. Just engineering as it actually happens in a Tanzanian dorm room-turned-lab.</p>
-                    <a href="#" target="_blank" class="yt-cta">▶ Subscribe on YouTube</a>
+                    <a href="#" target="_blank" class="yt-cta"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><polygon points="5 3 19 12 5 21 5 3"/></svg> Subscribe on YouTube</a>
                 </div>
-                <div class="yt-visual">🎬</div>
+                <div class="yt-visual"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
             </div>
         </div>
     </div>
@@ -856,11 +801,11 @@
             <h3>Let's build something</h3>
             <p>Whether you want to collaborate, invest, mentor, or just have a conversation about deep-tech in Africa — I'd love to hear from you.</p>
             <div class="contact-links">
-                <a href="mailto:ibrahim@umgafrica.com" class="contact-link">📧 Email</a>
-                <a href="https://github.com/abdullibrahim733-pixel" target="_blank" class="contact-link">💻 GitHub</a>
-                <a href="#" target="_blank" class="contact-link">🐦 X / Twitter</a>
-                <a href="#" target="_blank" class="contact-link">🔗 LinkedIn</a>
-                <a href="#" target="_blank" class="contact-link">▶ YouTube</a>
+                <a href="mailto:ibrahim@umgafrica.com" class="contact-link"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Email</a>
+                <a href="https://github.com/abdullibrahim733-pixel" target="_blank" class="contact-link"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> GitHub</a>
+                <a href="#" target="_blank" class="contact-link"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><path d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768-6.768M19.5 4l-5.964 5.964"/></svg> X / Twitter</a>
+                <a href="#" target="_blank" class="contact-link"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+                <a href="#" target="_blank" class="contact-link"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><polygon points="5 3 19 12 5 21 5 3"/></svg> YouTube</a>
             </div>
         </div>
     </div>
@@ -869,13 +814,13 @@
 <!-- FOOTER -->
 <footer>
     <div class="container">
-        <p><span class="brand">UMG Africa</span> &mdash; Engineering Africa's Future 🌍</p>
+        <p><span class="brand">UMG Africa</span> &mdash; Engineering Africa's Future <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.1em"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></p>
         <p style="margin-top:6px;">&copy; 2026 Ibrahim. All rights reserved.</p>
     </div>
 </footer>
 
 <!-- CHATBOT -->
-<button class="chat-toggle" id="chatToggle" aria-label="Open chat">💬</button>
+<button class="chat-toggle" id="chatToggle" aria-label="Open chat"><svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
 <div class="chat-panel" id="chatPanel">
     <div class="chat-header">
         <div class="avatar">I</div>
@@ -888,30 +833,13 @@
     <div class="chat-suggestions" id="chatSuggestions"></div>
     <div class="chat-input-area">
         <input type="text" id="chatInput" placeholder="Ask about Ibrahim, projects, or skills..." autocomplete="off"/>
-        <button class="chat-send" id="chatSend">➤</button>
+        <button class="chat-send" id="chatSend"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
 </div>
 
 <script>
 // ================================================================
-// 1. THEME TOGGLE — Catppuccin Dark / Light
-// ================================================================
-const themeToggle = document.getElementById('themeToggle');
-const html = document.documentElement;
-const savedTheme = localStorage.getItem('catppuccin-theme') || 'dark';
-html.setAttribute('data-theme', savedTheme);
-themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-
-themeToggle.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('catppuccin-theme', next);
-    themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
-});
-
-// ================================================================
-// 2. NAV
+// 1. NAV
 // ================================================================
 document.getElementById('navToggle').addEventListener('click', () => {
     document.getElementById('navLinks').classList.toggle('open');
@@ -924,7 +852,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ================================================================
-// 3. SCROLL REVEAL
+// 2. SCROLL REVEAL
 // ================================================================
 document.querySelectorAll('.reveal').forEach(el => {
     new IntersectionObserver((entries) => {
@@ -935,37 +863,37 @@ document.querySelectorAll('.reveal').forEach(el => {
 });
 
 // ================================================================
-// 4. CHATBOT
+// 3. CHATBOT
 // ================================================================
 const chatData = {
     greetings: [/hello/i, /hi/i, /hey/i, /greetings/i, /morning/i, /evening/i, /good (day|afternoon)/i],
     aboutMe: {
         keywords: [/who (are you|is ibrahim)/i, /tell me about (yourself|ibrahim|you)/i, /about/i, /background/i, /story/i],
-        response: "Ibrahim is a 19-year-old Tanzanian mechatronics engineering student and the founder of UMG Africa (Version Extreme Cooperation). He builds deep-tech — swarm robotics (Siafu), AI agents (Olive AI), programming languages (Ghost), and space technology (Hydrolith). His mission is to build a globally influential AI/robotics/engineering company that originates from Africa. 🌍"
+        response: "Ibrahim is a 19-year-old Tanzanian mechatronics engineering student and the founder of UMG Africa (Version Extreme Cooperation). He builds deep-tech — swarm robotics (Siafu), AI agents (Olive AI), programming languages (Ghost), and space technology (Hydrolith). His mission is to build a globally influential AI/robotics/engineering company that originates from Africa."
     },
     projects: {
         keywords: [/project/i, /building/i, /what (do|does) (you|he) build/i, /products/i, /work/i, /portfolio/i, /companies/i, /subsidiaries/i],
-        response: "Ibrahim runs 5 ventures under UMG Africa:\n🌿 **Olive AI** — AI WhatsApp agents for African businesses\n🔗 **Jenga Connect** — Construction marketplace\n🐜 **Siafu Robotics** — Swarm robotics\n👻 **Ghost** — A domain-specific systems programming language\n💧 **Hydrolith** — Space exploration technology\n\nCheck the #ventures section for the full flywheel!"
+        response: "Ibrahim runs 5 ventures under UMG Africa:\n**Olive AI** — AI WhatsApp agents for African businesses\n**Jenga Connect** — Construction marketplace\n**Siafu Robotics** — Swarm robotics\n**Ghost** — A domain-specific systems programming language\n**Hydrolith** — Space exploration technology\n\nCheck the #ventures section for the full flywheel!"
     },
     siafu: {
         keywords: [/siafu/i, /robot/i, /swarm/i, /ant/i],
-        response: "Siafu Robotics is Ibrahim's swarm robotics project — named after the Dorylus (Siafu) ant species. Each robot is a simple agent, but collectively they exhibit complex swarm intelligence. Built with custom KiCad PCBs, OpenSCAD chassis, and Webots simulation. 🐜🤖"
+        response: "Siafu Robotics is Ibrahim's swarm robotics project — named after the Dorylus (Siafu) ant species. Each robot is a simple agent, but collectively they exhibit complex swarm intelligence. Built with custom KiCad PCBs, OpenSCAD chassis, and Webots simulation."
     },
     olive: {
         keywords: [/olive/i, /ai agent/i, /whatsapp/i, /chatbot/i],
-        response: "Olive AI is an AI-powered WhatsApp agent platform for African businesses. It handles customer service, lead qualification, and order management automatically. Built with Python/Flask, Twilio, and OpenAI — multi-tenant SaaS. 🌿"
+        response: "Olive AI is an AI-powered WhatsApp agent platform for African businesses. It handles customer service, lead qualification, and order management automatically. Built with Python/Flask, Twilio, and OpenAI — multi-tenant SaaS."
     },
     ghost: {
         keywords: [/ghost/i, /language/i, /compiler/i, /programming language/i],
-        response: "Ghost is a domain-specific systems programming language built from scratch by Ibrahim. Alpha compiler in Rust with recursive descent parsing and a bytecode VM. Real compiler engineering from Tanzania. 👻"
+        response: "Ghost is a domain-specific systems programming language built from scratch by Ibrahim. Alpha compiler in Rust with recursive descent parsing and a bytecode VM. Real compiler engineering from Tanzania."
     },
     skills: {
         keywords: [/skill/i, /expertise/i, /know|knows/i, /tech stack/i, /technology/i, /tools/i],
-        response: "Ibrahim's key skill domains:\n⚙️ **Embedded Systems** — 90%\n🤖 **AI Agentic Automations** — 88%\n🧠 **AI / LLMs** — 85%\n🌐 **IoT** — 82%\n📐 **PCB Design & CAD** — 80%\n💻 **Full-Stack** — 78%\n\nSee the #skills section for the full breakdown!"
+        response: "Ibrahim's key skill domains:\n**Embedded Systems** — 90%\n**AI Agentic Automations** — 88%\n**AI / LLMs** — 85%\n**IoT** — 82%\n**PCB Design & CAD** — 80%\n**Full-Stack** — 78%\n\nSee the #skills section for the full breakdown!"
     },
     contact: {
         keywords: [/contact/i, /email/i, /reach/i, /message/i, /get in touch/i, /hire/i, /collaborate/i, /work with/i],
-        response: "You can reach Ibrahim at **ibrahim@umgafrica.com** or connect via the social links in the #contact section. He's open to collaborations, grants, mentorship, and investment conversations. 🤝"
+        response: "You can reach Ibrahim at **ibrahim@umgafrica.com** or connect via the social links in the #contact section. He's open to collaborations, grants, mentorship, and investment conversations."
     },
     education: {
         keywords: [/education/i, /student/i, /study/i, /school/i, /university/i, /mechatronics/i, /degree/i],
@@ -973,19 +901,19 @@ const chatData = {
     },
     age: {
         keywords: [/how old/i, /19/i, /age/i, /young/i],
-        response: "Ibrahim is 19 years old. Being young is an advantage — decades ahead to compound learning and impact. Age is just a number; execution is what matters. 💪"
+        response: "Ibrahim is 19 years old. Being young is an advantage — decades ahead to compound learning and impact. Age is just a number; execution is what matters."
     },
     location: {
         keywords: [/tanzania/i, /africa/i, /live|living/i, /located/i, /where/i, /dar/i],
-        response: "Ibrahim is based in **Tanzania**, East Africa. Building everything from a dorm room that doubles as a robotics lab, compiler workstation, and AI server room. 🌍"
+        response: "Ibrahim is based in **Tanzania**, East Africa. Building everything from a dorm room that doubles as a robotics lab, compiler workstation, and AI server room."
     },
     integrations: {
         keywords: [/integration/i, /tools/i, /stack/i, /tech stack/i, /software/i, /platform/i],
-        response: "Ibrahim works with:\n☁️ **AI & Cloud**: OpenAI, Anthropic, Supabase, n8n, Zapier, Railway\n🔬 **PCB Design**: EasyEDA, Altium, Flux, KiCad, Fusion 360\n⌨️ **Languages**: Python, Rust, JS/TS, C/C++\n🔌 **Hardware**: Arduino, ESP32, Raspberry Pi, STM32\n🧩 **Agentic**: LangChain, CrewAI, Hermes Agent, Claude Code\n\nSee the #integrations section for the full list!"
+        response: "Ibrahim works with:\n**AI & Cloud**: OpenAI, Anthropic, Supabase, n8n, Zapier, Railway\n**PCB Design**: EasyEDA, Altium, Flux, KiCad, Fusion 360\n⌨️ **Languages**: Python, Rust, JS/TS, C/C++\n**Hardware**: Arduino, ESP32, Raspberry Pi, STM32\n**Agentic**: LangChain, CrewAI, Hermes Agent, Claude Code\n\nSee the #integrations section for the full list!"
     },
     help: {
         keywords: [/help/i, /what can you/i, /capabilities/i, /commands/i, /options/i],
-        response: "I can tell you about:\n👤 **Ibrahim** — his background, mission, story\n🏢 **UMG Africa** — the holding company and all 5 subsidiaries\n🔧 **Skills & Proficiency** — domain expertise with progress bars\n🛠️ **Tools & Integrations** — his full tech stack\n📬 **Contact** — how to reach him\n\nJust ask me anything! 😊"
+        response: "I can tell you about:\n**Ibrahim** — his background, mission, story\n**UMG Africa** — the holding company and all 5 subsidiaries\n**Skills & Proficiency** — domain expertise with progress bars\n**Tools & Integrations** — his full tech stack\n**Contact** — how to reach him\n\nJust ask me anything!"
     }
 };
 
@@ -994,9 +922,9 @@ function getBotResponse(input) {
     for (const pattern of chatData.greetings) {
         if (pattern.test(lower)) {
             const greetings = [
-                "Hey there! 👋 I'm Ibrahim's virtual assistant. Ask me about his work, projects, or background!",
-                "Hello! Welcome to Ibrahim's portfolio. What would you like to know? 🤖",
-                "Hi! Great to have you here. Ibrahim's building some incredible deep-tech — ask me about any of it! 🌍"
+                "Hey there! I'm Ibrahim's virtual assistant. Ask me about his work, projects, or background!",
+                "Hello! Welcome to Ibrahim's portfolio. What would you like to know?",
+                "Hi! Great to have you here. Ibrahim's building some incredible deep-tech — ask me about any of it!"
             ];
             return greetings[Math.floor(Math.random() * greetings.length)];
         }
@@ -1010,9 +938,9 @@ function getBotResponse(input) {
         }
     }
     const defaults = [
-        "That's an interesting question! Try asking about Ibrahim's **projects**, **skills**, or **UMG Africa** ventures. Or type 'help' to see what I can do! 😊",
-        "Great question! I can tell you about Ibrahim's **background**, his **companies**, his **skills**, or the **tools** he works with. What interests you? 🤔",
-        "I'd love to help! Try asking about **Ibrahim's story**, his **projects**, or check out the **skills** section. You can also type 'help' for a full list. 🌟"
+        "That's an interesting question! Try asking about Ibrahim's **projects**, **skills**, or **UMG Africa** ventures. Or type 'help' to see what I can do!",
+        "Great question! I can tell you about Ibrahim's **background**, his **companies**, his **skills**, or the **tools** he works with. What interests you?",
+        "I'd love to help! Try asking about **Ibrahim's story**, his **projects**, or check out the **skills** section. You can also type 'help' for a full list."
     ];
     return defaults[Math.floor(Math.random() * defaults.length)];
 }
@@ -1073,7 +1001,7 @@ document.getElementById('chatInput').addEventListener('keydown', (e) => {
 });
 
 setTimeout(() => {
-    addChatMessage("👋 Hi! I'm Ibrahim's virtual assistant. Ask me about his background, projects, skills, or anything UMG Africa-related!", 'bot');
+    addChatMessage("Hi! I'm Ibrahim's virtual assistant. Ask me about his background, projects, skills, or anything UMG Africa-related!", 'bot');
     updateSuggestions('hello');
 }, 500);
 
@@ -1084,12 +1012,12 @@ chatToggle.addEventListener('click', () => {
     chatOpen = !chatOpen;
     chatPanel.classList.toggle('open', chatOpen);
     chatToggle.classList.toggle('active', chatOpen);
-    chatToggle.textContent = chatOpen ? '✕' : '💬';
+    chatToggle.innerHTML = chatOpen ? '<svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' : '<svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
     if (chatOpen) document.getElementById('chatInput').focus();
 });
 
 // ================================================================
-// 5. ACTIVE NAV LINK
+// 4. ACTIVE NAV LINK
 // ================================================================
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
