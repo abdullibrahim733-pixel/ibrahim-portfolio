@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /sitemap.xml
+Allow: /profile.jpg
+Allow: /bg.svg
+
+# Allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://ibrahim-portfolio-nu.vercel.app/sitemap.xml
