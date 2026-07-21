@@ -102,40 +102,20 @@
         /* PROFILE PHOTO */
         .hero-photo { display: flex; justify-content: center; align-items: center; }
         .profile-frame {
-            position: relative; width: 320px; height: 320px;
-            border-radius: 50%; padding: 6px;
+            position: relative; width: 300px; height: 420px;
+            border-radius: 16px; padding: 5px;
             background: linear-gradient(135deg, var(--green), var(--amber));
             box-shadow: 0 0 60px rgba(0,212,170,0.15);
             transition: all 0.4s;
         }
         .profile-frame:hover { transform: scale(1.03); box-shadow: 0 0 80px rgba(0,212,170,0.25); }
         .profile-inner {
-            width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+            width: 100%; height: 100%; border-radius: 12px; overflow: hidden;
             background: var(--dark); display: flex; align-items: center; justify-content: center;
             position: relative;
         }
-        .profile-inner svg { width: 100%; height: 100%; }
-        .profile-ring {
-            position: absolute; inset: -8px; border-radius: 50%;
-            border: 2px solid rgba(0,212,170,0.15);
-            animation: ringPulse 4s ease-in-out infinite;
-        }
-        @keyframes ringPulse {
-            0%,100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-        .profile-placeholder {
-            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, rgba(0,212,170,0.08), rgba(245,179,66,0.08));
-            font-size: 5rem; font-weight: 700; color: var(--green); user-select: none;
-        }
-        .photo-credit {
-            text-align: center; margin-top: 16px; font-size: 0.7rem; color: var(--text-muted);
-            opacity: 0.6; transition: opacity 0.3s;
-        }
-        .photo-credit:hover { opacity: 1; }
-        .photo-credit label { cursor: pointer; text-decoration: underline; text-decoration-style: dotted; }
-        .photo-credit input[type="file"] { display: none; }
+        .profile-inner img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-ring { display: none; }
 
         /* SECTION HEADERS */
         .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); font-weight: 600; margin-bottom: 8px; }
@@ -323,7 +303,7 @@
             .hero p { margin-left: auto; margin-right: auto; }
             .hero-actions { justify-content: center; }
             .hero-stats { justify-content: center; }
-            .profile-frame { width: 240px; height: 240px; }
+            .profile-frame { width: 220px; height: 300px; }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; flex-direction: column; background: rgba(8,8,14,0.98); position: absolute; top: 60px; left: 0; right: 0; padding: 20px 24px; gap: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -406,8 +386,8 @@
                 <div class="profile-frame">
                     <div class="profile-ring"></div>
                     <div class="profile-inner">
-                        <img id="profileImg" src="profile.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="Ibrahim"/>
-                        <!-- SVG fallback (hidden, kept for upload flow) -->
+                        <img src="profile.jpg" alt="Ibrahim"/>
+                        <!-- SVG fallback for custom upload -->
                         <svg id="profileSvg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="display:none;">
                             <defs>
                                 <linearGradient id="avatarBg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -433,10 +413,6 @@
                             <circle cx="150" cy="150" r="145" fill="none" stroke="rgba(0,212,170,0.15)" stroke-width="2"/>
                         </svg>
                     </div>
-                </div>
-                <div class="photo-credit">
-                    <label for="photoUpload">Upload your photo</label>
-                    <input type="file" id="photoUpload" accept="image/*"/>
                 </div>
             </div>
         </div>
@@ -607,31 +583,7 @@
 
 <script>
 // ================================================================
-// 1. PROFILE PHOTO UPLOAD
-// ================================================================
-document.getElementById('photoUpload').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            const img = document.getElementById('profileImg');
-            img.src = ev.target.result;
-            // Save to localStorage so it persists
-            try { localStorage.setItem('profilePhoto', ev.target.result); } catch(e) {}
-        };
-        reader.readAsDataURL(file);
-    }
-});
-// Restore custom upload from localStorage (overrides default profile.jpg)
-try {
-    const saved = localStorage.getItem('profilePhoto');
-    if (saved) {
-        document.getElementById('profileImg').src = saved;
-    }
-} catch(e) {}
-
-// ================================================================
-// 2. NAV
+// 1. NAV
 // ================================================================
 document.getElementById('navToggle').addEventListener('click', () => {
     document.getElementById('navLinks').classList.toggle('open');
@@ -644,7 +596,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ================================================================
-// 3. SCROLL REVEAL
+// 2. SCROLL REVEAL
 // ================================================================
 document.querySelectorAll('.reveal').forEach(el => {
     new IntersectionObserver((entries) => {
@@ -655,7 +607,7 @@ document.querySelectorAll('.reveal').forEach(el => {
 });
 
 // ================================================================
-// 4. CHATBOT
+// 3. CHATBOT
 // ================================================================
 const chatData = {
     greetings: [/hello/i, /hi/i, /hey/i, /greetings/i, /morning/i, /evening/i, /good (day|afternoon)/i],
@@ -824,7 +776,7 @@ chatToggle.addEventListener('click', () => {
 });
 
 // ================================================================
-// 6. ACTIVE NAV LINK
+// 4. ACTIVE NAV LINK
 // ================================================================
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
