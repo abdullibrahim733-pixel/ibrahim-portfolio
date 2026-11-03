@@ -25,6 +25,6 @@ Build the production site with `npm run build`.
 - `/work/:slug` — project detail pages
 - `/resources` — searchable resource library
 
-Live site: https://ibrahim-portfolio-abdullibrahim733-pixels-projects.vercel.app
+Live site: https://ibrahim-portfolio-seven-steel.vercel.app
 
 The project uses static resource records today. A Supabase backend can be connected when the resource management needs are defined.
