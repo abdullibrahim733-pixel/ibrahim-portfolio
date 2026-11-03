@@ -27,6 +27,7 @@ const skillSet = [
   { name: 'Mechatronics engineering', level: 60 },
   { name: 'Entrepreneurship', level: 60 },
 ]
+const loadingMessages = ['Meet Ibrahim', 'C++ is my language', 'Let’s work together']
 
 function SiteNav() {
   const home = window.location.pathname === '/'
@@ -62,6 +63,7 @@ function ScrollMotion() {
 function LoadingScreen() {
   const [visible, setVisible] = useState(true)
   const [exiting, setExiting] = useState(false)
+  const [messageIndex, setMessageIndex] = useState(0)
 
   useEffect(() => {
     const storageKey = 'ibrahim-portfolio-intro-seen'
@@ -71,9 +73,11 @@ function LoadingScreen() {
     }
 
     sessionStorage.setItem(storageKey, 'true')
-    const exitTimer = window.setTimeout(() => setExiting(true), 900)
-    const removeTimer = window.setTimeout(() => setVisible(false), 1160)
+    const messageTimer = window.setInterval(() => setMessageIndex((index) => (index + 1) % loadingMessages.length), 780)
+    const exitTimer = window.setTimeout(() => setExiting(true), 2200)
+    const removeTimer = window.setTimeout(() => setVisible(false), 2470)
     return () => {
+      window.clearInterval(messageTimer)
       window.clearTimeout(exitTimer)
       window.clearTimeout(removeTimer)
     }
@@ -84,6 +88,7 @@ function LoadingScreen() {
   return (
     <div className={`loading-screen${exiting ? ' is-exiting' : ''}`} role="status" aria-label="Loading Ibrahim Abdull’s portfolio">
       <img className="loading-logo" src="/ia-mark.png" alt="Ibrahim Abdull" />
+      <p className="loading-message" key={messageIndex}>{loadingMessages[messageIndex]}</p>
       <div className="loading-track" role="progressbar" aria-label="Loading portfolio" aria-valuemin={0} aria-valuemax={100} aria-valuetext="Loading">
         <span className="loading-progress" />
       </div>
