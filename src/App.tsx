@@ -59,6 +59,38 @@ function ScrollMotion() {
   return null
 }
 
+function LoadingScreen() {
+  const [visible, setVisible] = useState(true)
+  const [exiting, setExiting] = useState(false)
+
+  useEffect(() => {
+    const storageKey = 'ibrahim-portfolio-intro-seen'
+    if (sessionStorage.getItem(storageKey)) {
+      setVisible(false)
+      return
+    }
+
+    sessionStorage.setItem(storageKey, 'true')
+    const exitTimer = window.setTimeout(() => setExiting(true), 900)
+    const removeTimer = window.setTimeout(() => setVisible(false), 1160)
+    return () => {
+      window.clearTimeout(exitTimer)
+      window.clearTimeout(removeTimer)
+    }
+  }, [])
+
+  if (!visible) return null
+
+  return (
+    <div className={`loading-screen${exiting ? ' is-exiting' : ''}`} role="status" aria-label="Loading Ibrahim Abdull’s portfolio">
+      <img className="loading-logo" src="/ia-mark.png" alt="Ibrahim Abdull" />
+      <div className="loading-track" role="progressbar" aria-label="Loading portfolio" aria-valuemin={0} aria-valuemax={100} aria-valuetext="Loading">
+        <span className="loading-progress" />
+      </div>
+    </div>
+  )
+}
+
 function ProjectPreview({ project }: { project: Project }) {
   const artwork = project.slug === 'siafu'
     ? '/projects/siafu-ant.svg'
@@ -301,13 +333,18 @@ function HomePage() {
 
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/'
-  if (path === '/resources') return <ResourcesPage />
-  if (path === '/work') return <WorkPage />
-  if (path.startsWith('/work/')) {
-    const project = projects.find((item) => item.slug === path.split('/')[2])
-    return project ? <ProjectPage project={project} /> : <WorkPage />
-  }
-  return <HomePage />
+  const project = path.startsWith('/work/') ? projects.find((item) => item.slug === path.split('/')[2]) : undefined
+  const page = path === '/resources'
+    ? <ResourcesPage />
+    : path === '/work'
+      ? <WorkPage />
+      : project
+        ? <ProjectPage project={project} />
+        : path.startsWith('/work/')
+          ? <WorkPage />
+          : <HomePage />
+
+  return <><LoadingScreen />{page}</>
 }
 
 export default App
