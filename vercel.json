@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "framework": null,
-  "buildCommand": null,
-  "outputDirectory": ".",
-  "cleanUrls": true,
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/work/:path*", "destination": "/index.html" },
+    { "source": "/resources", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

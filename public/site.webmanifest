@@ -1,0 +1,21 @@
+{
+  "name": "Ibrahim Abdull — Engineer and Developer",
+  "short_name": "Ibrahim Abdull",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#242424",
+  "background_color": "#242424",
+  "display": "standalone"
+}
