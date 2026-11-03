@@ -12,6 +12,19 @@ const focusAreas = [
   ['Entrepreneurship', 'Turning real problems into useful ventures.'],
 ]
 
+function FocusIcon({ title }: { title: string }) {
+  const paths: Record<string, string> = {
+    Software: 'M17 15 10 22l7 7M31 15l7 7-7 7M28 12l-8 20',
+    'Artificial intelligence': 'M24 7v12m0 10v12M7 24h12m10 0h12M12 12l7 7m10 10 7 7m0-24-7 7m-10 10-7 7',
+    Robotics: 'M13 17h22v19H13zM24 17V9m-5 19h1m8 0h1M9 22H5m38 0h-4M9 31H5m38 0h-4M17 36v6m14-6v6M20 9h8',
+    'Embedded systems': 'M14 14h20v20H14zM19 8v6m10-6v6M19 34v6m10-6v6M8 19h6M8 29h6m20-10h6m-6 10h6',
+    'Electrical engineering': 'm27 7-16 21h12l-2 13 16-23H25z',
+    Entrepreneurship: 'M10 37V27h8v10M21 37V19h8v18M32 37V11h8v26M11 18l9-7 7 4 11-8m-6 0h6v6',
+  }
+
+  return <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={paths[title]} /></svg>
+}
+
 const values = [
   ['Curiosity', 'I ask better questions before I choose what to build.'],
   ['Integrity', 'I stay honest about what works, what does not and what needs testing.'],
@@ -257,7 +270,7 @@ function HomePage() {
 
       <section className="focus section" id="focus">
         <h2>What I work on</h2>
-        <div className="focus-grid">{focusAreas.map(([title, description]) => <article className="glass focus-card" key={title}><h3>{title}</h3><p>{description}</p></article>)}</div>
+        <div className="focus-grid">{focusAreas.map(([title, description]) => <article className="glass focus-card" key={title} tabIndex={0}><h3>{title}</h3><p>{description}</p><span className="focus-icon"><FocusIcon title={title} /></span></article>)}</div>
       </section>
 
       <section className="skills section" id="skills">
