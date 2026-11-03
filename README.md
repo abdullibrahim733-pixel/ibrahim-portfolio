@@ -7,7 +7,8 @@ Personal portfolio for Ibrahim Abdull, a Tanzanian engineer, developer and techn
 - React and TypeScript
 - Vite
 - CSS with responsive layouts and motion preferences
-- Vercel deployments
+- Supabase resource catalog
+- Vercel deployments from the `main` branch
 
 ## Local development
 
@@ -25,4 +26,8 @@ Build the production site with `npm run build`.
 - `/work/:slug` — project detail pages
 - `/resources` — searchable resource library
 
-The project uses static resource records today. A Supabase backend can be connected when the resource management needs are defined.
+## Resource database
+
+The public `resources` table is hosted in Supabase. Anonymous visitors can read published entries; write access is restricted to trusted project-side administration. Add file URLs in the `resource_url` column when the PDF and video files are ready.
+
+Required client build environment variables are listed in `.env.example`. Never commit actual secrets.
