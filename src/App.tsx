@@ -60,77 +60,13 @@ function ScrollMotion() {
 }
 
 function ProjectPreview({ project }: { project: Project }) {
+  const artwork = project.slug === 'siafu'
+    ? '/projects/siafu-ant.svg'
+    : `/projects/${project.slug}-logo.webp`
+
   return (
-    <div className={`project-preview preview-${project.slug}`} role="img" aria-label={`${project.name} concept visual`}>
-      <svg viewBox="0 0 900 560" aria-hidden="true">
-        {project.slug === 'dysen' && <>
-          <rect width="900" height="560" fill="#dfe3d2" />
-          <rect x="62" y="52" width="776" height="456" rx="22" fill="#f7f5ec" />
-          <rect x="62" y="52" width="190" height="456" rx="22" fill="#34382d" />
-          <rect x="91" y="88" width="103" height="22" rx="8" fill="#d5dda8" />
-          <rect x="92" y="151" width="112" height="14" rx="7" fill="#747d48" />
-          <rect x="92" y="190" width="86" height="13" rx="6" fill="#858b70" />
-          <rect x="92" y="229" width="101" height="13" rx="6" fill="#858b70" />
-          <rect x="286" y="91" width="302" height="32" rx="9" fill="#35372f" />
-          <rect x="286" y="152" width="246" height="108" rx="14" fill="#e5e9d9" />
-          <rect x="551" y="152" width="247" height="108" rx="14" fill="#ccd4b2" />
-          <rect x="286" y="283" width="512" height="183" rx="14" fill="#ecebe2" />
-          <rect x="316" y="322" width="126" height="100" rx="10" fill="#747d48" />
-          <rect x="460" y="322" width="145" height="100" rx="10" fill="#b4bd8f" />
-          <rect x="623" y="322" width="145" height="100" rx="10" fill="#d8ddc6" />
-        </>}
-        {project.slug === 'nguzo' && <>
-          <rect width="900" height="560" fill="#d7d8c9" />
-          <rect x="48" y="45" width="804" height="470" rx="22" fill="#f5f1e7" />
-          <rect x="48" y="45" width="804" height="70" rx="22" fill="#383a31" />
-          <rect x="88" y="70" width="144" height="20" rx="8" fill="#d6d9c3" />
-          <rect x="274" y="69" width="266" height="23" rx="11" fill="#626650" />
-          <rect x="88" y="147" width="425" height="48" rx="12" fill="#e5e2d6" />
-          <rect x="88" y="219" width="216" height="238" rx="16" fill="#c4b89f" />
-          <rect x="329" y="219" width="216" height="238" rx="16" fill="#d2d7bd" />
-          <rect x="570" y="219" width="216" height="238" rx="16" fill="#babaa9" />
-          <rect x="112" y="251" width="168" height="116" rx="10" fill="#ded8ca" />
-          <rect x="353" y="251" width="168" height="116" rx="10" fill="#e8e8dc" />
-          <rect x="594" y="251" width="168" height="116" rx="10" fill="#d9d8cf" />
-          <rect x="112" y="390" width="120" height="15" rx="7" fill="#4f5046" />
-          <rect x="353" y="390" width="120" height="15" rx="7" fill="#4f5046" />
-          <rect x="594" y="390" width="120" height="15" rx="7" fill="#4f5046" />
-        </>}
-        {project.slug === 'sahl' && <>
-          <rect width="900" height="560" fill="#dce3d6" />
-          <rect x="60" y="45" width="780" height="470" rx="24" fill="#f7f7f1" />
-          <rect x="60" y="45" width="176" height="470" rx="24" fill="#3a4335" />
-          <rect x="91" y="82" width="105" height="23" rx="8" fill="#d7e0b9" />
-          <rect x="91" y="149" width="112" height="36" rx="10" fill="#737e52" />
-          <rect x="91" y="204" width="96" height="14" rx="7" fill="#909985" />
-          <rect x="91" y="241" width="106" height="14" rx="7" fill="#909985" />
-          <rect x="91" y="278" width="83" height="14" rx="7" fill="#909985" />
-          <rect x="271" y="87" width="315" height="27" rx="9" fill="#42473c" />
-          <rect x="271" y="147" width="158" height="103" rx="15" fill="#e6ebdd" />
-          <rect x="447" y="147" width="158" height="103" rx="15" fill="#d5dfc7" />
-          <rect x="623" y="147" width="173" height="103" rx="15" fill="#edf0e7" />
-          <rect x="271" y="272" width="525" height="198" rx="16" fill="#eceee7" />
-          <rect x="302" y="305" width="146" height="132" rx="10" fill="#aab991" />
-          <rect x="466" y="305" width="146" height="132" rx="10" fill="#d4dfc9" />
-          <rect x="630" y="305" width="135" height="132" rx="10" fill="#c2d0b7" />
-        </>}
-        {project.slug === 'siafu' && <>
-          <rect width="900" height="560" fill="#dce1c9" />
-          <rect y="0" width="900" height="245" fill="#e9e9d9" />
-          <path d="M0 276H900V560H0Z" fill="#7e8a59" />
-          <path d="M0 365H900V560H0Z" fill="#697849" />
-          <path d="M0 451H900V560H0Z" fill="#586a3d" />
-          <path d="M0 330H900V350H0ZM0 416H900V436H0ZM0 500H900V520H0Z" fill="#aab282" />
-          <rect x="326" y="229" width="240" height="146" rx="24" fill="#3b4034" />
-          <rect x="365" y="185" width="164" height="76" rx="18" fill="#d8ddc2" />
-          <rect x="396" y="204" width="91" height="39" rx="8" fill="#7c8a5d" />
-          <rect x="281" y="344" width="84" height="80" rx="18" fill="#30342b" />
-          <rect x="527" y="344" width="84" height="80" rx="18" fill="#30342b" />
-          <rect x="215" y="286" width="111" height="24" rx="12" fill="#bac395" />
-          <rect x="565" y="286" width="120" height="24" rx="12" fill="#bac395" />
-        </>}
-      </svg>
-      <span className="preview-label">Concept visual</span>
+    <div className={`project-preview preview-${project.slug}`}>
+      <img src={artwork} alt={project.slug === 'siafu' ? 'Ant illustration for Siafu' : `${project.name} logo`} />
     </div>
   )
 }
